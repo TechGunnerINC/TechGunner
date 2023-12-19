@@ -1,0 +1,19 @@
+import { Router } from "express";
+import {
+  get,
+  edit,
+  remove,
+  blogs,
+  videos,
+  posts,
+  services,
+} from "../Controllers/user.js";
+import { token } from "../Middlewares/auth.js";
+import { v } from "../Middlewares/valid.js";
+const router = Router();
+router.route("/:username").get(get).put(edit, token, v).delete(remove, token);
+router.route("/:username/blogs").get(blogs);
+router.route("/:username/videos").get(videos);
+router.route("/:username/posts").get(posts);
+router.route("/:username/services").get(services);
+export default router;

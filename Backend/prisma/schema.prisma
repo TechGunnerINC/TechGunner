@@ -1,0 +1,229 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model user {
+  id        String           @id @default(uuid())
+  username  String           @unique
+  name      String           @default("Unknown")
+  about     String?          @db.Text
+  email     String           @unique
+  password  String           @db.Text
+  followers BigInt           @default(0)
+  interests String[]
+  following following[]
+  banner    String?          @db.Text
+  level     Levels           @default(Fresher)
+  points    BigInt           @default(0)
+  skills    String[]         @default(["No skills mentioned"])
+  links     String[]         @default(["No links provided"])
+  languages String[]         @default(["No languages specified"])
+  verified  Boolean          @default(false)
+  pp        String           @default("a") @db.Text
+  role      Roles            @default(User)
+  services  service[]
+  joined    DateTime         @default(now())
+  blogs     blog[]
+  messages  messages[]
+  review    reviews[]
+  shistory  search_history[]
+  history   history[]
+  videos    videos[]
+  post      post[]
+}
+
+model following {
+  id           Int     @id @default(autoincrement())
+  notification Boolean @default(false)
+  user         user?   @relation(fields: [uId], references: [id], onDelete: Cascade)
+  uId          String?
+}
+
+model videos {
+  id        String       @id @default(uuid())
+  url       String       @db.Text
+  title     String
+  uid       String
+  des       String       @db.Text
+  published Boolean      @default(false)
+  cover     String       @db.Text
+  created   DateTime     @default(now())
+  updated   DateTime     @updatedAt
+  likes     BigInt       @default(0)
+  dislikes  BigInt       @default(0)
+  views     BigInt       @default(0)
+  category  Categories[]
+  tags      String[]
+  user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
+  comments  comments[]
+  history   history[]
+}
+
+model post {
+  id        String       @id @default(uuid())
+  url       String       @db.Text
+  title     String
+  uid       String
+  des       String
+  published Boolean      @default(false)
+  cover     String       @db.Text
+  created   DateTime     @default(now())
+  updated   DateTime     @updatedAt
+  likes     BigInt       @default(0)
+  dislikes  BigInt       @default(0)
+  views     BigInt       @default(0)
+  category  Categories[]
+  tags      String[]
+  user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
+  comments  comments[]
+  history   history[]
+}
+
+model blog {
+  id        String       @id @default(uuid())
+  title     String
+  uid       String
+  des       String       @db.Text
+  published Boolean      @default(false)
+  cover     String       @db.Text
+  created   DateTime     @default(now())
+  updated   DateTime     @updatedAt
+  likes     BigInt       @default(0)
+  dislikes  BigInt       @default(0)
+  views     BigInt       @default(0)
+  tags      String[]
+  category  Categories[]
+  user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
+  comments  comments[]
+  history   history[]
+}
+
+model comments {
+  id      String  @id @default(uuid())
+  comment String  @db.Text
+  bId     String?
+  blog    blog?   @relation(fields: [bId], references: [id], onDelete: Cascade)
+  videos  videos? @relation(fields: [vId], references: [id], onDelete: Cascade)
+  vId     String?
+  post    post?   @relation(fields: [pId], references: [id], onDelete: Cascade)
+  pId     String?
+}
+
+model messages {
+  id        String   @id @default(uuid())
+  uid       String
+  message   String
+  seen      Boolean  @default(false)
+  sent_at   DateTime @default(now())
+  edited_at DateTime @updatedAt
+  user      user     @relation(fields: [uid], references: [id], onDelete: Cascade)
+}
+
+model search_history {
+  id          String   @id @default(uuid())
+  uid         String
+  query       String
+  searched_at DateTime @default(now())
+  user        user     @relation(fields: [uid], references: [id], onDelete: Cascade)
+}
+
+model service {
+  id     String    @id @default(uuid())
+  title  String
+  des    String
+  price  BigInt
+  cover  String    @db.Text
+  stars  Float     @default(0.0)
+  review reviews[]
+  user   user      @relation(fields: [uId], references: [id])
+  uId    String
+}
+
+model reviews {
+  id      Int     @id @default(autoincrement())
+  review  String  @db.Text
+  user    user    @relation(fields: [uId], references: [id])
+  uId     String
+  service service @relation(fields: [sId], references: [id])
+  sId     String
+}
+
+model history {
+  id         String   @id @default(uuid())
+  uid        String
+  bid        String?
+  watched_at DateTime @default(now())
+  user       user     @relation(fields: [uid], references: [id], onDelete: Cascade)
+  blogs      blog?    @relation(fields: [bid], references: [id], onDelete: Cascade)
+  videos     videos?  @relation(fields: [vId], references: [id], onDelete: Cascade)
+  vId        String?
+  pic        post?    @relation(fields: [pId], references: [id], onDelete: Cascade)
+  pId        String?
+}
+
+enum Roles {
+  SuperAdmin
+  BasicAdmin
+  Modrator
+  PriniumUser
+  DimondUser
+  User
+  Admin
+  Member
+  Advertiser
+}
+
+enum Levels {
+  Fresher
+  CyberCeleb
+  ContentCommander
+  NetworkNinja
+}
+
+enum Categories {
+  Technology
+  Sci_Fi
+  Science
+  Astronormy
+  Astrology
+  Entertainment
+  Sports
+  SoftwareEngineering
+  HardwareEngineering
+  AI
+  Gaming
+  GameDevelopment
+  WebDevelopment
+  GraphicDesigning
+  Documentry
+  Animation
+  ESports
+  NetworkEngineering
+  ML
+  Unboxing
+  Theory
+  Space
+  Education
+  Archaeology
+  Physics
+  Rockets
+  Motivation
+  History
+  Mistery
+  Programming
+  DataBases
+  Banking
+  Computers
+  Podcasts
+  VirtualRealty
+  AppDevelopment
+  Interviews
+  Fitness
+  News
+  Drama
+}
