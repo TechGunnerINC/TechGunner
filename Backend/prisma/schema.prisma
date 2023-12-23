@@ -8,40 +8,49 @@ datasource db {
 }
 
 model user {
-  id        String           @id @default(uuid())
-  username  String           @unique
-  name      String           @default("Unknown")
-  about     String?          @db.Text
-  email     String           @unique
-  password  String           @db.Text
-  followers BigInt           @default(0)
-  interests String[]
-  following following[]
-  banner    String?          @db.Text
-  level     Levels           @default(Fresher)
-  points    BigInt           @default(0)
-  skills    String[]         @default(["No skills mentioned"])
-  links     String[]         @default(["No links provided"])
-  languages String[]         @default(["No languages specified"])
-  verified  Boolean          @default(false)
-  pp        String           @default("a") @db.Text
-  role      Roles            @default(User)
-  services  service[]
-  joined    DateTime         @default(now())
-  blogs     blog[]
-  messages  messages[]
-  review    reviews[]
-  shistory  search_history[]
-  history   history[]
-  videos    videos[]
-  post      post[]
+  id          String           @id @default(uuid())
+  username    String           @unique
+  name        String           @default("Unknown")
+  about       String?          @db.Text
+  email       String           @unique
+  password    String           @db.Text
+  followers   BigInt           @default(0)
+  interests   String[]
+  following   following[]
+  banner      String?          @db.Text
+  level       Levels           @default(Fresher)
+  points      BigInt           @default(0)
+  skills      String[]         @default(["No skills mentioned"])
+  links       String[]         @default(["No links provided"])
+  languages   String[]         @default(["No languages specified"])
+  verified    Boolean          @default(false)
+  pp          String           @default("a") @db.Text
+  role        Roles            @default(User)
+  services    service[]
+  joined      DateTime         @default(now())
+  blogs       blog[]
+  messages    messages[]
+  review      reviews[]
+  shistory    search_history[]
+  history     history[]
+  videos      videos[]
+  post        post[]
+  collections collection[]
+}
+
+model collection {
+  id   String @id @default(uuid())
+  name String @default("Untitled")
+  des  String @default("No Description")
+  user   user   @relation(fields: [owner], references: [id])
+  owner String
 }
 
 model following {
   id           Int     @id @default(autoincrement())
   notification Boolean @default(false)
-  user         user?   @relation(fields: [uId], references: [id], onDelete: Cascade)
-  uId          String?
+  user         user   @relation(fields: [uId], references: [id], onDelete: Cascade)
+  uId          String
 }
 
 model videos {

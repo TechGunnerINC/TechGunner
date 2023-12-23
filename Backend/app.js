@@ -1,5 +1,5 @@
 import express from "express";
-import { token } from "./Middlewares/auth.js";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import http from "http";
 import dotenv from "dotenv";
@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-//app.use(token);
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(

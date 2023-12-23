@@ -7,6 +7,7 @@ import {
   videos,
   posts,
   services,
+  collections
 } from "../Controllers/user.js";
 import { token } from "../Middlewares/auth.js";
 import { v } from "../Middlewares/valid.js";
@@ -16,4 +17,5 @@ router.route("/:username/blogs").get(blogs);
 router.route("/:username/videos").get(videos);
 router.route("/:username/posts").get(posts);
 router.route("/:username/services").get(services);
+router.route("/:username/collections").get(collections);
 export default router;
