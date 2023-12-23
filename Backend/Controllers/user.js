@@ -145,7 +145,16 @@ const get = async (req, res) => {
 
 const edit = async (req, res) => {
   const { username } = req.params;
-  const { newUsername, password, pp, about, skills, languages } = req.body;
+  const {
+    newUsername,
+    password,
+    about,
+    skills,
+    languages,
+    links,
+    name,
+    email,
+  } = req.body;
 
   try {
     if (username === req.user.username) {
@@ -162,10 +171,12 @@ const edit = async (req, res) => {
         data: {
           username: newUsername,
           password: hash,
-          pp,
+          name,
+          email,
           about,
           skills,
           languages,
+          links,
         },
       });
 
@@ -173,7 +184,12 @@ const edit = async (req, res) => {
 
       const token = generateToken(user);
 
-      return res.status(200).json({ token, user });
+      return res
+        .status(200)
+        .setHeader("Authorization", `Bearer ${token}`)
+        .json({
+          message: "Profile updated successfully",
+        });
     } else {
       return res
         .status(403)
