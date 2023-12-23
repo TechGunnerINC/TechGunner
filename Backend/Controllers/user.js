@@ -218,7 +218,7 @@ const remove = async (req, res) => {
 const blogs = async (req, res) => {
   try {
     const { username } = req.params;
-    const blogs = await p.blog.findUnique({
+    const blogs = await p.user.findUnique({
       where: {
         username,
       },
@@ -232,7 +232,7 @@ const blogs = async (req, res) => {
 const videos = async (req, res) => {
   try {
     const { username } = req.params;
-    const videos = await p.videos.findUnique({
+    const videos = await p.user.findUnique({
       where: {
         username,
       },
@@ -249,7 +249,7 @@ const videos = async (req, res) => {
 const posts = async (req, res) => {
   try {
     const { username } = req.params;
-    const posts = await p.post.findUnique({
+    const posts = await p.user.findUnique({
       where: {
         username,
       },
@@ -266,7 +266,7 @@ const posts = async (req, res) => {
 const services = async (req, res) => {
   try {
     const { username } = req.params;
-    const services = await p.service.findUnique({
+    const services = await p.user.findUnique({
       where: {
         username,
       },
@@ -285,7 +285,7 @@ const services = async (req, res) => {
 const collections = async (req, res) => {
   try {
     const { username } = req.params;
-    const collections = await p.collection.findUnique({
+    const collections = await p.user.findUnique({
       where: {
         username,
       },
@@ -300,7 +300,7 @@ const collections = async (req, res) => {
       .status(err.code || 500)
       .json({ message: "Something went wrong" });
   }
-}
+};
 export {
   newUser,
   login,
@@ -312,5 +312,5 @@ export {
   posts,
   services,
   logout,
-  collections
+  collections,
 };
