@@ -1,4 +1,3 @@
-import { log } from "console";
 import jwt from "jsonwebtoken";
 const generateToken = (user, req, res) => {
   return jwt.sign(
@@ -9,10 +8,11 @@ const generateToken = (user, req, res) => {
 
 const token = (req, res, next) => {
   try {
-    const authHeader = req.headers["Authorization"];
+    const token =
+      req.cookies?.Token ||
+      req.header("Authorization")?.split("Bearer ")[1];
 
-    if (authHeader) {
-      const token = authHeader.split("Bearer ")[1];
+    if (token) {
       jwt.verify(token, process.env.JWT, (err, user) => {
         if (err) {
           return res.status(403).redirect("auth/login");

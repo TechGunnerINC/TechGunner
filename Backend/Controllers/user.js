@@ -2,20 +2,21 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { validationResult } from "express-validator";
 import { PrismaClient } from "@prisma/client";
-import { generateToken, token } from "../Middlewares/auth.js";
+import { generateToken } from "../Middlewares/auth.js";
 const p = new PrismaClient();
 const newUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const Username = `@${username.toLowerCase().replaceAll(" ", "")}`;
+    const User = `@${username.toLowerCase().replaceAll(" ", "")}`;
 
-    if (/[`!@#$%^&*()+=[\]{};':",.<>/?~]/.test(username)) {
-      return res
-        .status(400)
-        .json({ message: "Username cannot contain special characters" });
+    if (/[`!@#|$%^&*()+=[\]{};':",.<>/?~]/.test(username)) {
+      return res.status(400).json({
+        message:
+          "Username cannot contain special characters except for underscores and hyphens",
+      });
     }
 
-    if (!username && !email && !password) {
+    if (!username || !email || !password) {
       return res.status(400).json({ message: "Missing user data" });
     }
 
@@ -28,15 +29,21 @@ const newUser = async (req, res) => {
     const hash = await bcrypt.hash(password, salt);
 
     const user = await p.user.create({
-      data: { username: Username, email, password: hash },
+      data: { username: User, email, password: hash },
     });
 
     const token = generateToken(user);
 
-    return res
-      .status(201)
-      .setHeader("Authorization", `Bearer ${token}`)
-      .redirect(`profile/${Username}`);
+    return (
+      res
+        .status(201)
+        .cookie("Token", token, { secure: true, httpOnly: true })
+        .redirect(`profile/${User}`) ||
+      res
+        .status(201)
+        .setHeader("Authorization", `Bearer ${token}`)
+        .redirect(`profile/${User}`)
+    );
   } catch (err) {
     console.error(err.message);
     if (err.code === "P2002" && err.meta.target.includes("username")) {
@@ -52,14 +59,15 @@ const newUser = async (req, res) => {
 const login = async (req, res) => {
   const { username, password } = req.body;
 
-  if (!username && !password) {
+  if (!username || !password) {
     return res.status(400).json({ message: "Missing username or password" });
   }
 
+  const User = `@${username.toLowerCase().replaceAll(" ", "")}`;
   try {
     const result = await p.user.findUnique({
       where: {
-        username,
+        username: User,
       },
       select: {
         username: true,
@@ -74,11 +82,16 @@ const login = async (req, res) => {
 
       if (match) {
         const token = generateToken(user);
-
-        return res
-          .status(200)
-          .setHeader("Authorization", `Bearer ${token}`)
-          .redirect(`/profile/${user.username}`);
+        return (
+          res
+            .status(201)
+            .cookie("Token", token, { secure: true, httpOnly: true })
+            .redirect(`profile/${User}`) ||
+          res
+            .status(201)
+            .setHeader("Authorization", `Bearer ${token}`)
+            .redirect(`profile/${User}`)
+        );
       } else {
         return res.status(401).json({ message: "Wrong password" });
       }
@@ -93,7 +106,13 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
   try {
-    return res.status(200).setHeader("Authorization", null).redirect("/");
+    return (
+      res
+        .status(200)
+        .clearCookie("Token", { secure: true, httpOnly: true })
+        .redirect("/") ||
+      res.status(200).setHeader("Authorization", null).redirect("/")
+    );
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ message: "Something went wrong" });
