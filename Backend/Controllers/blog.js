@@ -50,6 +50,11 @@ const getId = async (req, res) => {
       where: { id },
       include: { comments: true },
     });
+
+    if (req.user?.id) {
+      pr.history.create({ data: { bid: id } });
+    }
+
     if (!p) {
       return res.status(404).send("Blog not found");
     }
