@@ -6,7 +6,7 @@ import { generateToken } from "../Middlewares/auth.js";
 const p = new PrismaClient();
 const newUser = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, name } = req.body;
     const User = `@${username.toLowerCase().replaceAll(" ", "")}`;
 
     if (/[`!@#|$%^&*()+=[\]{};':",.<>/?~]/.test(username)) {
@@ -29,7 +29,7 @@ const newUser = async (req, res) => {
     const hash = await bcrypt.hash(password, salt);
 
     const user = await p.user.create({
-      data: { username: User, email, password: hash },
+      data: { username: User, email, password: hash, name },
     });
 
     const token = generateToken(user);
