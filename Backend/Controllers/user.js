@@ -203,12 +203,15 @@ const edit = async (req, res) => {
 
       const token = generateToken(user);
 
-      return res
-        .status(200)
-        .setHeader("Authorization", `Bearer ${token}`)
-        .json({
+      return (
+        res
+          .status(200)
+          .cookie("Token", token, { secure: true, httpOnly: true })
+          .json({ message: "Profile updated successfully" }) ||
+        res.status(200).setHeader("Authorization", `Bearer ${token}`).json({
           message: "Profile updated successfully",
-        });
+        })
+      );
     } else {
       return res
         .status(403)
@@ -253,13 +256,18 @@ const remove = async (req, res) => {
 const blogs = async (req, res) => {
   try {
     const { username } = req.params;
-    const blogs = await p.user.findUnique({
+    const user = await p.user.findUnique({
       where: {
         username,
       },
       include: { blogs: true },
     });
-    res.status(200).json({ blogs });
+
+    if (user.blogs.length === 0) {
+      return res.json({ message: "No blogs found" });
+    }
+
+    res.status(200).json({ blogs: user });
   } catch (err) {
     console.error(err);
   }
@@ -267,13 +275,18 @@ const blogs = async (req, res) => {
 const videos = async (req, res) => {
   try {
     const { username } = req.params;
-    const videos = await p.user.findUnique({
+    const user = await p.user.findUnique({
       where: {
         username,
       },
       include: { videos: true },
     });
-    res.status(200).json({ videos });
+
+    if (user.videos.length === 0) {
+      return res.json({ message: "No videos found" });
+    }
+
+    res.status(200).json({ videos: user });
   } catch (err) {
     console.error(err);
     return res
@@ -284,13 +297,18 @@ const videos = async (req, res) => {
 const posts = async (req, res) => {
   try {
     const { username } = req.params;
-    const posts = await p.user.findUnique({
+    const user = await p.user.findUnique({
       where: {
         username,
       },
-      include: { posts: true },
+      include: { post: true },
     });
-    res.status(200).json({ posts });
+
+    if (user.post.length === 0) {
+      return res.json({ message: "No posts found" });
+    }
+
+    res.status(200).json({ posts: user.post });
   } catch (err) {
     console.error(err.message);
     return res
@@ -301,7 +319,7 @@ const posts = async (req, res) => {
 const services = async (req, res) => {
   try {
     const { username } = req.params;
-    const services = await p.user.findUnique({
+    const user = await p.user.findUnique({
       where: {
         username,
       },
@@ -309,7 +327,12 @@ const services = async (req, res) => {
         services: true,
       },
     });
-    res.status(200).json({ services });
+
+    if (user.services.length === 0) {
+      return res.json({ message: "No services found" });
+    }
+
+    res.status(200).json({ services: user.services });
   } catch (err) {
     console.error(err.message);
     return res
@@ -328,6 +351,11 @@ const collections = async (req, res) => {
         collections: true,
       },
     });
+
+    if (collections.collections.length === 0) {
+      return res.json({ message: "No collections found" });
+    }
+
     res.status(200).json({ collections });
   } catch (err) {
     console.error(err.message);
