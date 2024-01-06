@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export const actions: Actions = {
-	default: async ({ request, cookies }) => {
+	default: async ({ request }) => {
 		const data = await request.formData();
 		const username = data.get("username");
 		const password = data.get("password");
@@ -23,7 +23,6 @@ export const actions: Actions = {
 			name
 		});
 
-		cookies.get("Token");
 		return { success: true };
 	}
 };
