@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Saira Semi Condensed:700|Saira Semi Condensed:400');
+@import url("https://fonts.googleapis.com/css?family=Saira Semi Condensed:700|Saira Semi Condensed:400");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,7 +23,7 @@ body {
 	background: #0b1120;
 	color: #fff;
 	overflow-x: hidden;
-	font-family: 'Saira Semi Condensed';
+	font-family: "Saira Semi Condensed";
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -104,7 +104,7 @@ textarea {
 .prime,
 .sec {
 	padding: 3px 15px;
-	border-radius: 5px;
+	border-radius: 3px;
 	font-weight: 700;
 	transition: all 0.3s ease;
 }
@@ -113,7 +113,6 @@ textarea::placeholder {
 	color: #fff;
 }
 .prime {
-	filter: drop-shadow(0px 0px 10px #0effbd);
 	background: #0effbd;
 	color: #182546;
 }
@@ -124,7 +123,6 @@ textarea::placeholder {
 }
 .sec {
 	color: #fff;
-	filter: drop-shadow(0px 0px 10px #005eff);
 	background: #182546;
 }
 .sec:hover,
@@ -231,7 +229,7 @@ main {
 }
 .skil::after,
 .skil::before {
-	content: '';
+	content: "";
 	display: block;
 	position: relative;
 	border-radius: 5px;
@@ -255,35 +253,141 @@ main {
 	font-size: 20px;
 }
 .signup {
-	height: 450px;
-	width: 370px;
+	height: 370px;
+	width: 1050px;
 	margin: auto;
 	padding: 15px;
 	position: relative;
-	top: 150px;
+	top: 250px;
 	background: #182546;
+	border-radius: 10px;
 }
-.s-card {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 300px;
-	text-align: center;
-	padding: 6px;
-	outline: 3px solid #0effbd;
-	border-radius: 6px;
-	margin-left: 20px;
+.s-form {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: 15px;
+}
+
+.s-form input {
 	margin-top: 20px;
-	transition: all 0.3s;
+	outline: #0effbd 3px solid;
+	width: 430px;
+	height: 32px;
+	padding: 5px;
 }
-.s-card img {
+
+.gub {
+	position: relative;
+	right: 18em;
+}
+.loader {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	display: inline-block;
+	border-top: 3px solid #182546;
+	border-right: 3px solid transparent;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.gen {
+	position: relative;
+	left: 50em;
+	background: #022683;
+	width: 210px;
+	height: 32px;
+	padding-left: 25px;
+	border-radius: 5px;
+	padding-top: 3px;
+	top: -10px;
+}
+.fill {
+	font-variation-settings: "FILL" 1;
+	transition: all 0.5s;
+}
+
+#pass {
+	width: 360px;
+	transform: translateX(-5px) translateY(-25px);
+	outline: none;
+}
+.pass {
+	outline: #0effbd 3px solid;
+	width: 430px;
+	height: 32px;
+	padding: 5px;
+	border-radius: 5px;
+	transform: translateY(20px);
+}
+.count:before {
+	content: "";
+	position: relative;
+	display: block;
+	width: 430px;
+	height: 6px;
+	border-radius: 5px;
+	background: #022683;
+}
+
+.length {
+	height: 6px;
+	border-radius: 5px;
+	transform: translateX(35.8em);
+	z-index: 51;
+	transition: all 1s ease-in-out;
+}
+.lock {
 	position: absolute;
-	margin-left: -15rem;
-	border-radius: 0;
+	left: 35.5em;
+	top: 250px;
+	z-index: 25;
+	font-size: 1.45rem;
 }
-.s-card :is(:hover, :focus) .ac :is(:hover, :focus) {
-	opacity: 0.8;
+.show {
+	position: absolute;
+	top: 167px;
+	left: 41em;
 }
+
+.copy {
+	position: absolute;
+	top: 166px;
+	left: 35em;
+	font-size: 1.7rem;
+}
+.material-symbols-outlined {
+	transition: all 1s ease;
+}
+
+.at {
+	position: absolute;
+	top: 92.1px;
+	background: #0effbd;
+	font-size: 1.6rem;
+	padding: 0 5px;
+	height: 38px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	color: #182546;
+}
+
+.use {
+	width: 400px !important;
+	margin-left: 30px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
 .ac {
 	position: relative;
 	top: 15px;
@@ -298,7 +402,9 @@ main {
 	border-radius: 50%;
 	pointer-events: none;
 	z-index: 900;
-	transition: width 0.25s, height 0.25s;
+	transition:
+		width 0.25s,
+		height 0.25s;
 	transform: translate(-50%, -50%);
 	display: flex;
 	justify-content: center;
@@ -312,7 +418,7 @@ main {
 	margin-left: -75px;
 }
 .cursor.hover::before {
-	content: '';
+	content: "";
 	position: fixed;
 	width: 30px;
 	height: 30px;
@@ -434,11 +540,10 @@ main {
 	.profile img {
 		width: 300px;
 	}
-	.icon{
+	.icon {
 		font-size: 1.5rem;
 	}
-	.skil::after
-	{
+	.skil::after {
 		margin-top: -5px;
 	}
 	.eng::after {
@@ -447,7 +552,7 @@ main {
 	.jap::after {
 		margin-top: -35px;
 	}
-	.signup  {
+	.signup {
 		width: 500px;
 		height: 600px;
 		top: 300px;

@@ -1,5 +1,5 @@
 <script>
-	import Type from '../assets/Type.svelte';
+	import Type from "../assets/Type.svelte";
 </script>
 
 <svelte:head>
@@ -11,10 +11,9 @@
 		Assalamu Alaikum Dear Visitor. I am <b class="b">Tech Gunner</b> <br />
 		I'm <Type /> <br />
 		from <b class="b">Islamabad, Pakistan.</b> <br />
-		I am deeply honored that you've taken the time to explore <br>
-		 my website, which I created
-		with the help of <br>Bing's AI, ChatGPT. my staff is also 
-		working hard to upgrade this platform to the <br />
+		I am deeply honored that you've taken the time to explore <br />
+		my website, which I created with the help of <br />Bing's AI, ChatGPT. my staff is also working
+		hard to upgrade this platform to the <br />
 		next level. However, creating this website wasn't easy for me.
 		<br />
 		I have some physical disabilities that affect my mobility and speech. <br />
@@ -37,10 +36,10 @@
 		My next project would be to create a translator for myself, <br />
 		so everyone can understand me. However, it may sometimes provide wrong translations <br />
 		due to the complexity of my speech. <br />
-		Then I will work on a suit that will help me walk and control my body parts, 
-		<br>
+		Then I will work on a suit that will help me walk and control my body parts,
+		<br />
 		and do those things that I wasn't able to do before,
-		<br />		
+		<br />
 		After that, I will learn hacking to hack and delete the dark web As the mission of our <br />
 		company is to make the internet and the world a better place, <br /> Deleting the dark web will
 		be worth it, it may reduce illegal activities and cybercrime, <br />
@@ -71,7 +70,7 @@
 		<br />- Tech Gunner
 	</p>
 	<div class="profile">
-		<img src="me.jpg" alt="a pictrue of me, please say mashallah" width="250"/>
+		<img src="me.jpg" alt="a pictrue of me, please say mashallah" width="250" />
 		<b class="mt-3 text-lg">Skills</b>
 		<ul>
 			<li>

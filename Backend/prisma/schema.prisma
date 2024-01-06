@@ -14,12 +14,12 @@ model user {
   about       String?          @db.Text
   email       String           @unique
   password    String           @db.Text
-  followers   BigInt           @default(0)
+  followers   Int              @default(0)
   interests   String[]
   following   following[]
   banner      String?          @db.Text
   level       Levels           @default(Fresher)
-  points      BigInt           @default(0)
+  points      Int              @default(0)
   skills      String[]         @default(["No skills mentioned"])
   links       String[]         @default(["No links provided"])
   languages   String[]         @default(["No languages specified"])
@@ -39,17 +39,17 @@ model user {
 }
 
 model collection {
-  id   String @id @default(uuid())
-  name String @default("Untitled")
-  des  String @default("No Description")
-  user   user   @relation(fields: [owner], references: [id])
+  id    String @id @default(uuid())
+  name  String @default("Untitled")
+  des   String @default("No Description")
+  user  user   @relation(fields: [owner], references: [id])
   owner String
 }
 
 model following {
   id           Int     @id @default(autoincrement())
   notification Boolean @default(false)
-  user         user   @relation(fields: [uId], references: [id], onDelete: Cascade)
+  user         user    @relation(fields: [uId], references: [id], onDelete: Cascade)
   uId          String
 }
 
@@ -63,9 +63,9 @@ model videos {
   cover     String       @db.Text
   created   DateTime     @default(now())
   updated   DateTime     @updatedAt
-  likes     BigInt       @default(0)
-  dislikes  BigInt       @default(0)
-  views     BigInt       @default(0)
+  likes     Int          @default(0)
+  dislikes  Int          @default(0)
+  views     Int          @default(0)
   category  Categories[]
   tags      String[]
   user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
@@ -83,9 +83,9 @@ model post {
   cover     String       @db.Text
   created   DateTime     @default(now())
   updated   DateTime     @updatedAt
-  likes     BigInt       @default(0)
-  dislikes  BigInt       @default(0)
-  views     BigInt       @default(0)
+  likes     Int          @default(0)
+  dislikes  Int          @default(0)
+  views     Int          @default(0)
   category  Categories[]
   tags      String[]
   user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
@@ -102,9 +102,9 @@ model blog {
   cover     String       @db.Text
   created   DateTime     @default(now())
   updated   DateTime     @updatedAt
-  likes     BigInt       @default(0)
-  dislikes  BigInt       @default(0)
-  views     BigInt       @default(0)
+  likes     Int          @default(0)
+  dislikes  Int          @default(0)
+  views     Int          @default(0)
   tags      String[]
   category  Categories[]
   user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
@@ -145,7 +145,7 @@ model service {
   id     String    @id @default(uuid())
   title  String
   des    String
-  price  BigInt
+  price  Int
   cover  String    @db.Text
   stars  Float     @default(0.0)
   review reviews[]

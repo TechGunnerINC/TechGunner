@@ -1,23 +1,32 @@
 import bcrypt from "bcrypt";
-import crypto from "crypto";
 import { validationResult } from "express-validator";
 import { PrismaClient } from "@prisma/client";
 import { generateToken } from "../Middlewares/auth.js";
+
 const p = new PrismaClient();
+
+const options = {
+  secure: true,
+  httpOnly: true,
+  domain: ".localhost:5173",
+};
 const newUser = async (req, res) => {
   try {
     const { username, email, password, name } = req.body;
     const User = `@${username.toLowerCase().replaceAll(" ", "")}`;
+    const mail = email.toLowerCase();
 
-    if (/[`!@#|$%^&*()+=[\]{};':",.<>/?~]/.test(username)) {
+    if (/[\W_]/.test(username)) {
       return res.status(400).json({
         message:
-          "Username cannot contain special characters except for underscores and hyphens",
+          "Username cannot contain special characters except for underscores and hyphens (Dashes).",
       });
     }
 
     if (!username || !email || !password) {
-      return res.status(400).json({ message: "Missing user data" });
+      return res
+        .status(400)
+        .json({ message: "Username Password and E-mail are required" });
     }
 
     const errors = validationResult(req);
@@ -28,25 +37,24 @@ const newUser = async (req, res) => {
     const salt = await bcrypt.genSalt(15);
     const hash = await bcrypt.hash(password, salt);
 
+    p.$connect()
     const user = await p.user.create({
-      data: { username: User, email, password: hash, name },
+      data: { username: User, email: mail, password: hash, name },
     });
-
+    p.$disconnect();
+    
     const token = generateToken(user);
-
-    return (
-      res
-        .status(201)
-        .cookie("Token", token, { secure: true, httpOnly: true })
-        .redirect(`profile/${User}`) ||
-      res
-        .status(201)
-        .setHeader("Authorization", `Bearer ${token}`)
-        .redirect(`profile/${User}`)
-    );
+    
+    return res
+    .status(201)
+    .cookie("Token", token, options)
+    .json({ user, token });
   } catch (err) {
-    console.error(err.message);
-    if (err.code === "P2002" && err.meta.target.includes("username")) {
+    console.error(err);
+    if (
+      (err.code === "P2002" && err.meta.target.includes("username")) ||
+      (err.code === "P2002" && err.meta.target.includes("email"))
+    ) {
       return res
         .status(409)
         .json({ message: "Username or email already exists" });
@@ -82,16 +90,11 @@ const login = async (req, res) => {
 
       if (match) {
         const token = generateToken(user);
-        return (
-          res
-            .status(201)
-            .cookie("Token", token, { secure: true, httpOnly: true })
-            .redirect(`profile/${User}`) ||
-          res
-            .status(201)
-            .setHeader("Authorization", `Bearer ${token}`)
-            .redirect(`profile/${User}`)
-        );
+
+        return res
+          .status(201)
+          .cookie("Token", token, options)
+          .json({ user, token });
       } else {
         return res.status(401).json({ message: "Wrong password" });
       }
@@ -99,22 +102,16 @@ const login = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
 
 const logout = async (req, res) => {
   try {
-    return (
-      res
-        .status(200)
-        .clearCookie("Token", { secure: true, httpOnly: true })
-        .redirect("/") ||
-      res.status(200).setHeader("Authorization", null).redirect("/")
-    );
+    return res.status(200).clearCookie("Token", options);
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -157,7 +154,7 @@ const get = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -203,23 +200,21 @@ const edit = async (req, res) => {
 
       const token = generateToken(user);
 
-      return (
-        res
-          .status(200)
-          .cookie("Token", token, { secure: true, httpOnly: true })
-          .json({ message: "Profile updated successfully" }) ||
-        res.status(200).setHeader("Authorization", `Bearer ${token}`).json({
-          message: "Profile updated successfully",
-        })
-      );
+      return res
+        .status(201)
+        .cookie("Token", token, options)
+        .json({ user, token });
     } else {
       return res
         .status(403)
         .json({ message: "You are not authorized to update this profile" });
     }
   } catch (err) {
-    console.error(err.message);
-    if (err.code === "P2002" && err.meta.target.includes("username")) {
+    console.error(err);
+    if (
+      (err.code === "P2002" && err.meta.target.includes("username")) ||
+      err.meta.target.includes("email")
+    ) {
       return res.status(409).json({ message: "Username already exists" });
     }
 
@@ -249,7 +244,7 @@ const remove = async (req, res) => {
         .json({ message: "You are not authorized to delete this profile" });
     }
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -310,7 +305,7 @@ const posts = async (req, res) => {
 
     res.status(200).json({ posts: user.post });
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     return res
       .status(err.code || 500)
       .json({ message: "Something went wrong" });
@@ -334,7 +329,7 @@ const services = async (req, res) => {
 
     res.status(200).json({ services: user.services });
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     return res
       .status(err.code || 500)
       .json({ message: "Something went wrong" });
@@ -358,7 +353,7 @@ const collections = async (req, res) => {
 
     res.status(200).json({ collections });
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     return res
       .status(err.code || 500)
       .json({ message: "Something went wrong" });

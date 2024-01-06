@@ -1,27 +1,27 @@
 <script>
-	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
+	import { onMount } from "svelte";
+	import { writable } from "svelte/store";
 
-	const dynamicText = writable('');
-	
+	const dynamicText = writable("");
+
 	const words = [
-		'An Overthinker',
-		'A Gamer',
-		'A Programmer',
-		'The Creator of this website',
-		'The CEO of Tech Gunner INC.',
-		'The Founder of Tech Gunner INC.',
-		'A Businessman',
-		'An Entrepreneur',
-		'A Full Stack Web Developer',
-		'A Content Writer',
-		'A Blogger',
-		'A Photo Retoucher',
-		'A UI/UX Designer',
-		'A Student',
-		'A Human',
-		'A Muslim',
-		'A Batman Fan',
+		"An Overthinker",
+		"A Gamer",
+		"A Programmer",
+		"The Creator of this website",
+		"The CEO of Tech Gunner INC.",
+		"The Founder of Tech Gunner INC.",
+		"A Businessman",
+		"An Entrepreneur",
+		"A Full Stack Web Developer",
+		"A Content Writer",
+		"A Blogger",
+		"A Photo Retoucher",
+		"A UI/UX Designer",
+		"A Student",
+		"A Human",
+		"A Muslim",
+		"A Batman Fan"
 	];
 
 	let wordIndex = 0;
@@ -60,7 +60,7 @@
 		position: relative;
 	}
 	.span::before {
-		content: '';
+		content: "";
 		height: 40px;
 		width: 2px;
 		position: absolute;
