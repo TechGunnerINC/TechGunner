@@ -62,6 +62,7 @@ and hold billions of users at the same time.
 3. **Set up Frontend**
 
   cd Frontend
+  
   npm i
   
   npm run format
