@@ -1,10 +1,19 @@
-<script>
+<script lang="ts">
 	import { fade } from "svelte/transition";
+	import { onMount } from "svelte";
 	let show = false;
 
 	function open() {
 		show = !show;
 	}
+
+	onMount(() => {
+		addEventListener("keydown", (e: KeyboardEvent) => {
+			if ((e.ctrlKey && e.key == " ") || (e.metaKey && e.key == " ")) {
+				open();
+			}
+		});
+	});
 </script>
 
 {#if show}
@@ -14,7 +23,7 @@
 <button on:click={open} class="material-symbols-outlined menu"> menu </button>
 
 {#if show}
-	<nav class="s-bar" transition:fade={{ delay: 50, duration: 100 }}>
+	<nav transition:fade={{ delay: 50, duration: 100 }}>
 		{#each ["/", "/explore", "/messages", "/blogs", "/courses", "/freelance", "/tools", "/wallpapers", "/about", "/contact", "/projects"] as link}
 			<a data-sveltekit-preload-data href={link}>
 				<b
@@ -62,7 +71,7 @@
 	.bg {
 		width: 100%;
 		height: 100%;
-		z-index: 10;
+		z-index: 100;
 		position: fixed;
 		background: rgba(14, 17, 32, 0.541);
 	}

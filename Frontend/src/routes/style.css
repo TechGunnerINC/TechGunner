@@ -173,7 +173,7 @@ header {
 }
 
 nav {
-	z-index: 11;
+	z-index: 110;
 	overflow-y: auto;
 	background: #0e1120;
 	display: flex;
