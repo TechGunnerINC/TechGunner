@@ -26,7 +26,9 @@ Join us today and embark on a journey of endless possibilities!
 
 ## What am I trying to create
 
-I want to build a webapp that loads in less than 1s,
+I want to build a Multitasking, Social media, Chat application
+
+that loads in less than 1s,
 
 is super secure,
 
@@ -36,9 +38,9 @@ is extremely fast & private,
 
 Updates in real-time, 
 
-has 1B OPS, 
+Can handle 1B OPS,
 
-has 1B throughput,
+has a really high throughput,
 
 supports CRUD, SSR & SPA, 
 
