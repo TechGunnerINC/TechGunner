@@ -1,7 +1,6 @@
 import type { Actions } from "./$types";
 import axios from "axios";
 
-
 export const actions: Actions = {
 	default: async ({ request }) => {
 		const data = await request.formData();
