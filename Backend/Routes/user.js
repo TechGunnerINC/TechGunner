@@ -1,13 +1,13 @@
 import { Router } from "express";
 import {
-  get,
-  edit,
-  remove,
-  blogs,
-  videos,
-  posts,
-  services,
-  collections
+	get,
+	edit,
+	remove,
+	blogs,
+	videos,
+	posts,
+	services,
+	collections
 } from "../Controllers/user.js";
 import { token } from "../Middlewares/auth.js";
 import { v } from "../Middlewares/valid.js";

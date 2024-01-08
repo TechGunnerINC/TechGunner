@@ -1,32 +1,37 @@
 {
-  "name": "tgb",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "type": "module",
-  "scripts": {
-    "run": "nodemon ."
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@prisma/client": "^5.7.0",
-    "bcrypt": "^5.1.1",
-    "cloudinary": "^1.41.0",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "express-validator": "^7.0.1",
-    "jsonwebtoken": "^9.0.2",
-    "multer": "^1.4.5-lts.1",
-    "socket.io": "^4.7.2"
-  },
-  "devDependencies": {
-    "@types/node": "^20.10.1",
-    "nodemon": "^3.0.1",
-    "prisma": "^5.7.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.3.2"
-  }
+	"name": "tgb",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"run": "prettier --write . && nodemon ."
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@prisma/client": "^5.7.1",
+		"@supercharge/strings": "^2.0.0",
+		"bcrypt": "^5.1.1",
+		"cloudinary": "^1.41.0",
+		"compression": "^1.7.4",
+		"cookie-parser": "^1.4.6",
+		"cors": "^2.8.5",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"express-validator": "^7.0.1",
+		"helmet": "^7.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"multer": "^1.4.5-lts.1",
+		"socket.io": "^4.7.2"
+	},
+	"devDependencies": {
+		"@types/node": "^20.10.1",
+		"eslint": "^8.56.0",
+		"nodemon": "^3.0.1",
+		"prettier": "^3.1.1",
+		"prisma": "^5.7.1",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.3.2"
+	}
 }

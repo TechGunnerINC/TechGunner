@@ -1,14 +1,5 @@
 import { Router } from "express";
-import {
-  post,
-  put,
-  get,
-  del,
-  getId,
-  postComment,
-  destroy,
-  edit,
-} from "../Controllers/blog.js";
+import { post, put, get, del, getId, postComment, destroy, edit } from "../Controllers/blog.js";
 import { token } from "../Middlewares/auth.js";
 import { v } from "../Middlewares/valid.js";
 const router = Router();

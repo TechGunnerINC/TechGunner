@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { enhance } from "$app/forms";
+	import str from "@supercharge/strings";
 	import type { ActionData } from "./$types";
 
 	export let form: ActionData;
 
 	onMount(() => {
 		const pass = document.querySelector("#pass") as HTMLInputElement;
-		const form = document.querySelector(".s-form") as HTMLFormElement;
 		check();
 		pass.oninput = check;
 		pass.onfocus = check;
@@ -137,8 +137,9 @@
 
 	function submit() {
 		const gub = document.querySelector(".gub") as HTMLButtonElement;
-		const user = document.querySelector(".use") as HTMLInputElement;
-		const User = `@${user.value.toLowerCase().replaceAll(" ", "")}`;
+		const user = document.querySelector(".use") as any;
+
+		const User = `@${str(user.pascal().replaceAll(" ", "").get())}`;
 
 		gub.innerHTML = "";
 		gub.classList.add("loader");

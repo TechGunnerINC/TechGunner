@@ -3,14 +3,13 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "prettier --write . && vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest"
 	},
@@ -18,7 +17,6 @@
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.27.4",
-		"@types/randomatic": "^3.1.5",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.16",
@@ -38,7 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"axios": "^1.6.2",
-		"randomatic": "^3.1.1"
+		"@supercharge/strings": "^2.0.0",
+		"axios": "^1.6.2"
 	}
 }
