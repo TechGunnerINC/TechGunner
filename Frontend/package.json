@@ -36,7 +36,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supercharge/strings": "^2.0.0",
 		"axios": "^1.6.2"
 	}
 }

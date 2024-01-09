@@ -11,7 +11,6 @@
 	"license": "ISC",
 	"dependencies": {
 		"@prisma/client": "^5.7.1",
-		"@supercharge/strings": "^2.0.0",
 		"bcrypt": "^5.1.1",
 		"cloudinary": "^1.41.0",
 		"compression": "^1.7.4",
@@ -31,7 +30,6 @@
 		"nodemon": "^3.0.1",
 		"prettier": "^3.1.1",
 		"prisma": "^5.7.1",
-		"ts-node": "^10.9.1",
-		"typescript": "^5.3.2"
+		"ts-node": "^10.9.1"
 	}
 }

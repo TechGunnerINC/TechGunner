@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { enhance } from "$app/forms";
-	import str from "@supercharge/strings";
 	import type { ActionData } from "./$types";
 
 	export let form: ActionData;
@@ -137,9 +136,9 @@
 
 	function submit() {
 		const gub = document.querySelector(".gub") as HTMLButtonElement;
-		const user = document.querySelector(".use") as any;
+		const user = document.querySelector(".use") as HTMLInputElement;
 
-		const User = `@${str(user.pascal().replaceAll(" ", "").get())}`;
+		const User = `@${user.value.toLowerCase().replaceAll(" ", "")}`;
 
 		gub.innerHTML = "";
 		gub.classList.add("loader");
@@ -179,7 +178,4 @@
 		</form>
 		<a href="/login" class="ac">Already have an account? <b class="b underline"> Login</b></a>
 	</div>
-	{#if form?.err} 
-	<div class="err">{form?.err}</div>
-	{/if}
 </main>
