@@ -179,4 +179,7 @@
 		</form>
 		<a href="/login" class="ac">Already have an account? <b class="b underline"> Login</b></a>
 	</div>
+	{#if form?.err} 
+	<div class="err">{form?.err}</div>
+	{/if}
 </main>

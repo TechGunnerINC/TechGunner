@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
 import { PrismaClient } from "@prisma/client";
 import { generateToken } from "../Middlewares/auth.js";
-import str from "@supercharge/strings";
+import Str from "@supercharge/strings";
 
 const p = new PrismaClient();
 
@@ -15,7 +15,7 @@ const newUser = async (req, res) => {
 	try {
 		const { username, email, password, name } = req.body;
 
-		const User = `@${str(username).pascal().replaceAll(" ", "").get()}`;
+		const User = `@${Str(username).pascal().replaceAll(" ", "").get()}`;
 		const mail = email.toLowerCase().replace(" ", "");
 
 		if (
@@ -67,7 +67,7 @@ const login = async (req, res) => {
 		return res.status(400).json({ message: "Missing username or password" });
 	}
 
-		const User = `@${str(username).pascal().replaceAll(" ", "").get()}`;
+	const User = `@${Str(username).pascal().replaceAll(" ", "").get()}`;
 	try {
 		const result = await p.user.findUnique({
 			where: {
