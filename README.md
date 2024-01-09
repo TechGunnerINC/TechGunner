@@ -52,34 +52,40 @@ and hold billions of users at the same time.
 ## Project Setup & Contributing Guide
 
 1. **Run These Commands in your Terminal**
-
+```bash
   git clone https://github.com/Tech-Gunner/TechGunner.git
   
   cd TechGunner
   
   code .
-  
+```
 2. **Open Split Terminal in VS code**
 
 3. **Set up Frontend**
-
+```bash
   cd Frontend
   
   npm i
-  
-  npm run format
-  
-  npm run lint
-  
+
   npm run dev
-  
+``` 
 4. **Set up Backend**
-   
+```bash
    cd Backend
    
    npm i
    
    npm run run
+``` 
+5. **Go to the Backend and set up the Environment Variables**
+
+### To contribute. Follow the instructions down below
+
+1.  Create a fork
+2.  Create your feature branch: `git checkout -b my-feature`
+3.  Commit your changes: `git commit -am 'Added some feature'`
+4.  Push to the branch: `git push origin my-new-feature`
+5.  Submit a pull request 🚀
 
 ***
 And boom you are good to go. **Help me create the 🌎 better place**
