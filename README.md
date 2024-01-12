@@ -1,7 +1,6 @@
 # Our Platform Description
 
-Ignite your flaming potential on Tech Gunner INC.! 
-
+Ignite your flaming potential on Tech Gunner!
 
 Dive into captivating blogs that ignite your curiosity.
 
@@ -19,10 +18,9 @@ Chat with other users.
 
 Shop for endless stories in our curated library of books, novels, and comics.
 
-
 Join us today and embark on a journey of endless possibilities!
 
-***
+---
 
 ## What am I trying to create
 
@@ -30,53 +28,66 @@ I want to build a Multitasking, Social media, Chat application
 
 that loads in less than 1s,
 
-is super secure,
+is extremely secure & private,
 
 is lightweight,
 
-is extremely fast & private, 
-
-Updates in real-time, 
+Updates in real-time,
 
 Can handle 1B OPS,
 
 has a really high throughput,
 
-supports CRUD, SSR & SPA, 
-
-hosts on AWS,
+supports CRUD, SSR & SPA,
 
 and hold billions of users at the same time.
 
-***
+---
+
+## Technology's in use:
+
+Prime Language: `JavaScript`
+
+JavaScript Runtime: `Node JS (Will switch to Bun in the future)`
+
+Database: `PostgreSQL`
+
+ORM: `Prisma`
+
+Backend Framework: `Express JS (will switch to ElysiaJS in the future)`
+
+Frontend Framework: `Sveltekit`
+
+---
+
 ## Project Setup & Contributing Guide
 
 1. **Run These Commands in your Terminal**
+
 ```bash
   git clone https://github.com/Tech-Gunner/TechGunner.git
-  
   cd TechGunner
-  
   code .
 ```
+
 2. **Open Split Terminal in VS code**
 
 3. **Set up Frontend**
+
 ```bash
   cd Frontend
-  
   npm i
-
   npm run dev
-``` 
+```
+
 4. **Set up Backend**
+
 ```bash
    cd Backend
-   
    npm i
-   
    npm run run
-``` 
+```
+
 5. **Go to the Backend and set up the Environment Variables**
 
 ### To contribute. Follow the instructions down below
@@ -87,5 +98,6 @@ and hold billions of users at the same time.
 4.  Push to the branch: `git push origin my-new-feature`
 5.  Submit a pull request 🚀
 
-***
+---
+
 And boom you are good to go. **Help me create the 🌎 better place**
