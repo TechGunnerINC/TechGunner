@@ -1,76 +1,23 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { enhance } from "$app/forms";
+	import { genPass, int } from "$lib/Random";
 	import type { ActionData } from "./$types";
 
 	export let form: ActionData;
 
 	onMount(() => {
 		const pass = document.querySelector("#pass") as HTMLInputElement;
+		const gen = document.querySelector(".gen") as HTMLButtonElement;
+
+		gen.onclick = () => {
+			pass.value = genPass(int(50, 85));
+			pass.focus();
+		};
 		check();
 		pass.oninput = check;
 		pass.onfocus = check;
 	});
-
-	function int(min: number, max: number): number {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
-	}
-
-	function genPass() {
-		const pass = document.querySelector("#pass") as any;
-		const up = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		const low = "abcdefghijklmnopqrstuvwxyz";
-		const num = "0123456789";
-		const sym = "`~!@#$%^&*()-_=+[]{}|;:',.<>/?";
-		const spacial =
-			"€£¥©®™÷×§¶°¨≠∞µαβγδεζηθικλμνξÄÅÉæÆôöòûùよかとカく➾⟁⟂⟃⟄⟅⟆⟇⟈⟉⟊⟋⟌⟍⟎⟏⟐⟑⟒⟓⟔⟕⟖⟗⟘⟙⟚⟛⟜⟝⟞⟟⟠⟡⟢⟣⟤⟥⟦⟧⟨⟩⟪⟫⟬⟭⟮⟯⟰⟱⟲⟳⟴⟵⟶⟷⟸⟹⟺⟻⟼⟽⟾⟿ÿÖÜø£ß¢₩₱°²³ªº¿⌐¬½¼¡«»┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌αßΓπΣστΦΘδφε∩≡±≥≤⌠⌡≈·√ⁿ²ⱭⱮⱯⱰⱱⱲⱳⱴⱵⱶⱷⱸⱹⱺⱻⱼⱽⱾⱿⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲍⲎⲏⲐⲑⲒⲓⲗⲘⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲲⲳⲴⲵⲶⲷⲸⲹⲺⲻⲼⲽⲾⲿⳀⳁⳄⳅⳆⳇⳈⳉⳊⳋⳌⳍⳎⳏⳐⳑⳒⳓⳔⳕⳖⳗⳘⳙⳚⳛⳜⳝⳞⳟⳠⳡⳢⳣⳤ⳥⳦⳧⳨⳩⳪ⳫⳬⳭⳮ⳯🜀🜁🜂🜃🜄🜅🜆🜇🜈🜉🜊🜋🜌🜍🜎🜏🜐🜑🜒🜓🜔🜕🜖🜗🜘🜙🜚🜛🜜🜝🜞🜟🜠🜡🜢🜣🜤🜥🜦🜧🜨🜩🜪🜫🜬🜭🜮🜯🜰🜱🜲🜳🜴🜵🜶🜷🜸🜹🜺🜻🜼🜽🜾🜿🝀🝁🝂🝃🝄🝅🝆🝇🝈🝉🝊🝋🝌🝍🝎🝏🝐🝑🝒🝓🝔🝕🝖🝗🝘🝙🝚🝛🝜🝝🝞🝟🝠🝡🝢🝣🝤🝥🝦🝧🝨🝩🝪🝫🝬🝭🝮🝯🝰🝱🝲🝳";
-
-		let password = [];
-		let length: any = int(50, 83);
-
-		function randomIndex(set: any) {
-			let byte: any = int(1, 528193);
-			let index = byte % set.length;
-			return index;
-		}
-
-		function isSimilarOrSequential(char: any, prev: any) {
-			const similar = "il1Lo0O";
-			const sequential = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-			if (similar.includes(char) && similar.includes(prev)) {
-				return true;
-			}
-			let index = sequential.indexOf(char);
-			if (index > -1 && (sequential[index - 1] === prev || sequential[index + 1] === prev)) {
-				return true;
-			}
-			return false;
-		}
-
-		password.push(up[randomIndex(up)]);
-		password.push(low[randomIndex(low)]);
-		password.push(num[randomIndex(num)]);
-		password.push(sym[randomIndex(sym)]);
-		password.push(spacial[randomIndex(spacial)]);
-
-		for (let i = password.length - 1; i > 0; i--) {
-			let j = randomIndex(password);
-			[password[i], password[j]] = [password[j], password[i]];
-		}
-
-		for (let i = 4; i < length; i++) {
-			let set = [up, low, num, sym, spacial][randomIndex([up, low, num, sym, spacial])];
-			let char = set[randomIndex(set)];
-			let prev = password[i - 1];
-			while (isSimilarOrSequential(char, prev)) {
-				char = set[randomIndex(set)];
-			}
-			password.push(char);
-		}
-
-		pass.value = password.join("");
-		pass.focus();
-	}
 
 	function show() {
 		const x = document.querySelector("#pass") as HTMLInputElement;
@@ -173,7 +120,7 @@
 			<div class="length" />
 			<div class="count"></div>
 			<span class="material-symbols-outlined lock">lock</span>
-			<button on:click={genPass} class="gen" type="button">Auto Generate password</button>
+			<button class="gen" type="button">Auto Generate password</button>
 			<button type="submit" class="prime gub w-[28em] mt-[40px]">Sign up</button>
 		</form>
 		<a href="/login" class="ac">Already have an account? <b class="b underline"> Login</b></a>

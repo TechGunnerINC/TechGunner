@@ -4,7 +4,7 @@
 	onMount(() => {
 		addEventListener("keyup", jump);
 	});
-	
+
 	function jump(e: KeyboardEvent): any {
 		const search = document.querySelector("#sea") as HTMLInputElement;
 
