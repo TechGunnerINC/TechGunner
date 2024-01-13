@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Saira Semi Condensed:700|Saira Semi Condensed:400");
+@import url('https://fonts.googleapis.com/css?family=Saira Semi Condensed:700|Saira Semi Condensed:400');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,7 +23,7 @@ body {
 	background: #0b1120;
 	color: #fff;
 	overflow-x: hidden;
-	font-family: "Saira Semi Condensed";
+	font-family: 'Saira Semi Condensed';
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -229,7 +229,7 @@ main {
 }
 .skil::after,
 .skil::before {
-	content: "";
+	content: '';
 	display: block;
 	position: relative;
 	border-radius: 5px;
@@ -312,7 +312,7 @@ main {
 	top: -10px;
 }
 .fill {
-	font-variation-settings: "FILL" 1;
+	font-variation-settings: 'FILL' 1;
 	transition: all 0.5s;
 }
 
@@ -330,7 +330,7 @@ main {
 	transform: translateY(20px);
 }
 .count:before {
-	content: "";
+	content: '';
 	position: relative;
 	display: block;
 	width: 430px;
@@ -418,7 +418,7 @@ main {
 	margin-left: -75px;
 }
 .cursor.hover::before {
-	content: "";
+	content: '';
 	position: fixed;
 	width: 30px;
 	height: 30px;

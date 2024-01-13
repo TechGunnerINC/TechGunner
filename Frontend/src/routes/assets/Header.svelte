@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount } from 'svelte'
 
 	onMount(() => {
-		addEventListener("keyup", jump);
-	});
+		addEventListener('keyup', jump)
+	})
 
 	function jump(e: KeyboardEvent): any {
-		const search = document.querySelector("#sea") as HTMLInputElement;
+		const search = document.querySelector('#sea') as HTMLInputElement
 
 		if (
-			e.key == "/" &&
+			e.key == '/' &&
 			!(document.activeElement instanceof HTMLInputElement) &&
 			!(document.activeElement instanceof HTMLTextAreaElement)
 		) {
-			search.focus();
+			search.focus()
 		}
 	}
 </script>

@@ -1,5 +1,5 @@
 <script>
-	import Type from "./assets/Type.svelte";
+	import Type from './assets/Type.svelte'
 </script>
 
 <svelte:head>

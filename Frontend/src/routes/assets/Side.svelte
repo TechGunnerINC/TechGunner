@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { fade } from "svelte/transition";
-	import { onMount } from "svelte";
-	let show = false;
+	import { fade } from 'svelte/transition'
+	import { onMount } from 'svelte'
+	let show = false
 
 	function open() {
-		show = !show;
+		show = !show
 	}
 
 	onMount(() => {
-		addEventListener("keydown", (e: KeyboardEvent) => {
-			if ((e.ctrlKey && e.key == " ") || (e.metaKey && e.key == " ")) {
-				open();
+		addEventListener('keydown', (e: KeyboardEvent) => {
+			if ((e.ctrlKey && e.key == ' ') || (e.metaKey && e.key == ' ')) {
+				open()
 			}
-		});
-	});
+		})
+	})
 </script>
 
 {#if show}
@@ -24,43 +24,43 @@
 
 {#if show}
 	<nav transition:fade={{ delay: 50, duration: 100 }}>
-		{#each ["/", "/explore", "/messages", "/blogs", "/courses", "/freelance", "/tools", "/wallpapers", "/about", "/contact", "/projects"] as link}
+		{#each ['/', '/explore', '/messages', '/blogs', '/courses', '/freelance', '/tools', '/wallpapers', '/about', '/contact', '/projects'] as link}
 			<a data-sveltekit-preload-data href={link}>
 				<b
 					class="ico fa-solid"
-					class:fa-house-chimney={link === "/"}
-					class:fa-magnifying-glass={link === "/explore"}
-					class:fa-envelope={link === "/messages"}
-					class:fa-pen={link === "/blogs"}
-					class:fa-user-graduate={link === "/courses"}
-					class:fa-briefcase={link === "/freelance"}
-					class:fa-wrench={link === "/tools"}
-					class:fa-image={link === "/wallpapers"}
-					class:fa-user={link === "/about"}
-					class:fa-comment={link === "/contact"}
-					class:fa-landmark={link === "/projects"}
+					class:fa-house-chimney={link === '/'}
+					class:fa-magnifying-glass={link === '/explore'}
+					class:fa-envelope={link === '/messages'}
+					class:fa-pen={link === '/blogs'}
+					class:fa-user-graduate={link === '/courses'}
+					class:fa-briefcase={link === '/freelance'}
+					class:fa-wrench={link === '/tools'}
+					class:fa-image={link === '/wallpapers'}
+					class:fa-user={link === '/about'}
+					class:fa-comment={link === '/contact'}
+					class:fa-landmark={link === '/projects'}
 				/><b class="link"
-					>{link === "/explore"
-						? "Explore"
-						: link === "/messages"
-						  ? "Messages"
-						  : link === "/blogs"
-						    ? "Blogs"
-						    : link === "/courses"
-						      ? "Courses and Tutorials"
-						      : link === "/freelance"
-						        ? "Freelance"
-						        : link === "/tools"
-						          ? "Tools"
-						          : link === "/wallpapers"
-						            ? "Wallpapers"
-						            : link === "/about"
-						              ? "About Me"
-						              : link === "/contact"
-						                ? "Contact Me"
-						                : link === "/projects"
-						                  ? "Our Projects"
-						                  : "Home"}</b
+					>{link === '/explore'
+						? 'Explore'
+						: link === '/messages'
+							? 'Messages'
+							: link === '/blogs'
+								? 'Blogs'
+								: link === '/courses'
+									? 'Courses and Tutorials'
+									: link === '/freelance'
+										? 'Freelance'
+										: link === '/tools'
+											? 'Tools'
+											: link === '/wallpapers'
+												? 'Wallpapers'
+												: link === '/about'
+													? 'About Me'
+													: link === '/contact'
+														? 'Contact Me'
+														: link === '/projects'
+															? 'Our Projects'
+															: 'Home'}</b
 				>
 			</a>
 		{/each}
