@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 	import { onMount } from 'svelte'
+	import { page } from '$app/stores'
+
 	let show = false
 
 	function open() {
@@ -25,7 +27,7 @@
 {#if show}
 	<nav transition:fade={{ delay: 50, duration: 100 }}>
 		{#each ['/', '/explore', '/messages', '/blogs', '/courses', '/freelance', '/tools', '/wallpapers', '/about', '/contact', '/projects'] as link}
-			<a data-sveltekit-preload-data href={link}>
+			<a class:act={$page.url.pathname === link} data-sveltekit-preload-data href={link}>
 				<b
 					class="ico fa-solid"
 					class:fa-house-chimney={link === '/'}
