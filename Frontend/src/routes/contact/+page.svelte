@@ -1,7 +1,7 @@
 <svelte:head>
 	<title>Contact me - Tech Gunner</title>
 </svelte:head>
-<main class="cont">
+<div class="cont">
 	<section>
 		<h2 class="text-center">Contact me</h2>
 		<h5 class=" text-center">There are 90% chance of me replying</h5>
@@ -16,11 +16,13 @@
 				<a target="_blank" href="https://www.instagram.com/techgunner"
 					><img src="ins.png" alt="insta" width="28" /></a
 				>
-				<a target="_blank" href="/user/techgunner"><img src="favicon.png" alt="tg" width="32" /></a>
+				<a target="_blank" href="/profile/@techgunner"
+					><img src="favicon.png" alt="tg" width="32" /></a
+				>
 				<a target="_blank" href="https://www.twitter.com/itstechgunner"
 					><img src="x.png" alt="x" width="25" /></a
 				>
 			</div>
 		</form>
 	</section>
-</main>
+</div>

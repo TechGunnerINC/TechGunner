@@ -8,4 +8,6 @@
 <Header />
 <Side />
 <Cursor />
-<slot />
+<main>
+	<slot />
+</main>

@@ -7,7 +7,7 @@
 	<meta name="description" content="The official site of Tech Gunner" />
 </svelte:head>
 
-<main class="p-[20px]">
+<div class="p-[20px]">
 	<section class="mt-[6rem]">
 		<h1>
 			Assalamu Alaikum Dear Visitor. <br /> I am <b class="b">Tech Gunner</b> <br />
@@ -33,4 +33,4 @@
 			class="mx-[75rem] tg-logo mt-[-37rem]"
 		/>
 	</section>
-</main>
+</div>

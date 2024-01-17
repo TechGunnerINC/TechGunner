@@ -2,6 +2,10 @@
 	import { onMount } from 'svelte'
 	import { enhance } from '$app/forms'
 	import { genPass, int } from '$lib/Random'
+	import { goto } from '$app/navigation'
+	import type { Actions } from './$types'
+
+	let Form: Actions
 
 	onMount(() => {
 		const pass = document.querySelector('#pass') as HTMLInputElement
@@ -80,9 +84,9 @@
 
 	function submit() {
 		const gub = document.querySelector('.gub') as HTMLButtonElement
-
+		const loader = document.querySelector('.loader') as HTMLSpanElement
 		gub.innerHTML = ''
-		gub.classList.add('loader')
+		loader.style.display = 'block'
 	}
 </script>
 
@@ -90,29 +94,27 @@
 	<title>Sign up - Tech Gunner</title>
 	<meta name="description" content="Create a new Tech Gunner account" />
 </svelte:head>
-<main>
-	<div class="signup">
-		<h2 class="text-center">Sign up</h2>
-		<div class="at">@</div>
-		<form class="s-form" method="POST" use:enhance on:submit|preventDefault={submit}>
-			<input type="text" placeholder="Username" name="username" class="use" />
-			<input type="text" name="name" placeholder="Full Name" />
-			<input type="email" name="email" placeholder="E-mail" />
-			<div class="pass">
-				<input type="password" name="password" placeholder="Password" id="pass" />
-			</div>
-			<button on:click={copy} type="button" class="material-symbols-outlined copy"
-				>content_copy</button
-			>
-			<button type="button" class="material-symbols-outlined show" on:click={show}
-				>visibility</button
-			>
-			<div class="length" />
-			<div class="count"></div>
-			<span class="material-symbols-outlined lock">lock</span>
-			<button class="gen" type="button">Auto Generate password</button>
-			<button type="submit" class="prime gub w-[28em] mt-[40px]">Sign up</button>
-		</form>
-		<a href="/login" class="ac">Already have an account? <b class="b underline"> Login</b></a>
-	</div>
-</main>
+
+<div class="signup">
+	<h2 class="text-center">Sign up</h2>
+	<div class="at">@</div>
+	<form class="s-form" method="POST" use:enhance on:submit|preventDefault={submit}>
+		<input type="text" placeholder="Username" name="username" class="use" />
+		<input type="text" name="name" placeholder="Full Name" />
+		<input type="email" name="email" placeholder="E-mail" />
+		<div class="pass">
+			<input type="password" name="password" placeholder="Password" id="pass" />
+		</div>
+		<button on:click={copy} type="button" class="material-symbols-outlined copy"
+			>content_copy</button
+		>
+		<button type="button" class="material-symbols-outlined show" on:click={show}>visibility</button>
+		<div class="length" />
+		<div class="count"></div>
+		<span class="material-symbols-outlined lock">lock</span>
+		<button class="gen" type="button">Auto Generate password</button>
+		<button type="submit" class="prime gub w-[28em] mt-[40px] h-[30px]">Sign up</button>
+	</form>
+	<span class="loader absolute left-[31.6em] top-[18.55em]" />
+	<a href="/login" class="ac">Already have an account? <b class="b underline"> Login</b></a>
+</div>

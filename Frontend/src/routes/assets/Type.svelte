@@ -9,10 +9,6 @@
 		'A Gamer',
 		'A Programmer',
 		'The Creator of this website',
-		'The CEO of Tech Gunner INC.',
-		'The Founder of Tech Gunner INC.',
-		'A Businessman',
-		'An Entrepreneur',
 		'A Full Stack Web Developer',
 		'A Content Writer',
 		'A Blogger',
@@ -21,7 +17,6 @@
 		'A Student',
 		'A Human',
 		'A Muslim',
-		'A Batman Fan'
 	]
 
 	let wordIndex = 0

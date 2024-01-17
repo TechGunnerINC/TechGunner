@@ -1,8 +1,9 @@
 import type { Actions } from './$types'
 import axios from 'axios'
+import { redirect } from '@sveltejs/kit'
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async ({ request, cookies }) => {
 		const data = await request.formData()
 		const username = data.get('username')
 		const password = data.get('password')
@@ -13,20 +14,26 @@ export const actions: Actions = {
 			name = username
 		}
 
-		const port = 3000 || 5000
+		const port = 3000 ?? 5000 ?? 6000
 
-		axios
-			.post(`http://localhost:${port}/auth/signup`, {
+		const info = await axios.post(
+			`http://localhost:${port}/auth/signup`,
+			{
 				email,
 				password,
 				username,
 				name
-			})
-			.then(function (response) {
-				return { success: true, info: response.data }
-			})
-			.catch(function (error) {
-				return { success: false, error: error.message }
-			})
+			},
+			{ withCredentials: true }
+		)
+
+		cookies.set('Token', info.data.token, {
+			httpOnly: true,
+			secure: true,
+			priority: 'high',
+			path: '/',
+		})
+
+		redirect(308, `/profile/${info.data.user.username}`)
 	}
 }

@@ -2,6 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+	--Primary: #0effbd;
+	--BG: #0b1120;
+	--BG-300: #182546;
+}
 ::-webkit-scrollbar {
 	width: 7px;
 }
@@ -10,7 +15,7 @@
 }
 ::-webkit-scrollbar-thumb {
 	border-radius: 25px;
-	background: #0effbd;
+	background: var(--Primary);
 }
 * {
 	cursor: none !important;
@@ -20,7 +25,7 @@ body {
 	padding: 0;
 	margin: 0;
 	scroll-behavior: smooth;
-	background: #0b1120;
+	background: var(--BG);
 	color: #fff;
 	overflow-x: hidden;
 	font-family: 'Saira Semi Condensed';
@@ -30,8 +35,8 @@ body {
 	font-weight: 400;
 }
 *::selection {
-	background: #0effbd;
-	color: #182546;
+	background: var(--Primary);
+	color: var(--BG-300);
 }
 img::selection {
 	background: none;
@@ -77,7 +82,7 @@ pre {
 	font-size: 1.5rem;
 }
 .b {
-	color: #0effbd;
+	color: var(--Primary);
 }
 b {
 	letter-spacing: 0.5px;
@@ -97,7 +102,7 @@ img:hover {
 form,
 input,
 textarea {
-	background: #182546;
+	background: var(--BG-300);
 	border-radius: 5px;
 	color: #fff;
 }
@@ -113,8 +118,8 @@ textarea::placeholder {
 	color: #fff;
 }
 .prime {
-	background: #0effbd;
-	color: #182546;
+	background: var(--Primary);
+	color: var(--BG-300);
 }
 .prime:hover,
 .prime:focus {
@@ -123,7 +128,7 @@ textarea::placeholder {
 }
 .sec {
 	color: #fff;
-	background: #182546;
+	background: var(--BG-300);
 }
 .sec:hover,
 .sec:focus {
@@ -135,7 +140,6 @@ i {
 	color: #9ca3af;
 	transition: all 0.3s ease;
 }
-
 i:hover,
 i:focus {
 	color: #fff;
@@ -144,7 +148,7 @@ header {
 	position: fixed;
 	width: 100%;
 	display: flex;
-	background: #0b1120;
+	background: var(--BG);
 	z-index: 5;
 	align-items: center;
 	justify-content: space-around;
@@ -171,7 +175,6 @@ header {
 .logo {
 	margin-left: 35px;
 }
-
 nav {
 	z-index: 110;
 	overflow-y: auto;
@@ -183,7 +186,6 @@ nav {
 	height: 100vh;
 	font-size: 17px;
 }
-
 nav a {
 	text-transform: capitalize;
 	margin: 5px;
@@ -194,8 +196,8 @@ nav a {
 }
 nav a:is(:hover, :focus, :active, .act) {
 	margin-left: 25px;
-	background: #0effbd;
-	color: #182546;
+	background: var(--Primary);
+	color: var(--BG-300);
 }
 .ico {
 	margin-left: -6px;
@@ -236,17 +238,16 @@ main {
 	height: 10px;
 }
 .skil::before {
-	background: #182546;
+	background: var(--BG-300);
 	width: 270px;
 }
 .skil::after {
-	background: #0effbd;
+	background: var(--Primary);
 	top: -34px;
 }
-
 .icon {
-	background: #0effbd;
-	color: #182546;
+	background: var(--Primary);
+	color: var(--BG-300);
 	padding: 5px;
 	margin: 4px;
 	border-radius: 5px;
@@ -259,7 +260,7 @@ main {
 	padding: 15px;
 	position: relative;
 	top: 250px;
-	background: #182546;
+	background: var(--BG-300);
 	border-radius: 10px;
 }
 .s-form {
@@ -267,30 +268,28 @@ main {
 	grid-template-columns: 2fr 1fr;
 	gap: 15px;
 }
-
 .s-form input {
 	margin-top: 20px;
-	outline: #0effbd 3px solid;
+	outline: var(--Primary) 3px solid;
 	width: 430px;
 	height: 32px;
 	padding: 5px;
 }
-
 .gub {
 	position: relative;
 	right: 18em;
 }
 .loader {
-	width: 48px;
-	height: 48px;
+	width: 28px;
+	height: 28px;
 	border-radius: 50%;
 	display: inline-block;
-	border-top: 3px solid #182546;
+	border-top: 3px solid var(--BG);
 	border-right: 3px solid transparent;
 	box-sizing: border-box;
-	animation: rotation 1s linear infinite;
+	animation: rotation 0.5s linear infinite;
+	display: none;
 }
-
 @keyframes rotation {
 	0% {
 		transform: rotate(0deg);
@@ -299,7 +298,6 @@ main {
 		transform: rotate(360deg);
 	}
 }
-
 .gen {
 	position: relative;
 	left: 50em;
@@ -315,14 +313,13 @@ main {
 	font-variation-settings: 'FILL' 1;
 	transition: all 0.5s;
 }
-
 #pass {
 	width: 360px;
 	transform: translateX(-5px) translateY(-25px);
 	outline: none;
 }
 .pass {
-	outline: #0effbd 3px solid;
+	outline: var(--Primary) 3px solid;
 	width: 430px;
 	height: 32px;
 	padding: 5px;
@@ -338,7 +335,6 @@ main {
 	border-radius: 5px;
 	background: #022683;
 }
-
 .length {
 	height: 6px;
 	border-radius: 5px;
@@ -358,7 +354,6 @@ main {
 	top: 167px;
 	left: 41em;
 }
-
 .copy {
 	position: absolute;
 	top: 166px;
@@ -368,26 +363,23 @@ main {
 .material-symbols-outlined {
 	transition: all 1s ease;
 }
-
 .at {
 	position: absolute;
 	top: 92.1px;
-	background: #0effbd;
+	background: var(--Primary);
 	font-size: 1.6rem;
 	padding: 0 5px;
 	height: 38px;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
-	color: #182546;
+	color: var(--BG-300);
 }
-
 .use {
 	width: 400px !important;
 	margin-left: 30px;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
-
 .ac {
 	position: relative;
 	top: 15px;
@@ -396,7 +388,7 @@ main {
 	position: fixed;
 	width: 35px;
 	height: 35px;
-	border: 4px solid #0effbd;
+	border: 4px solid var(--Primary);
 	margin-left: -13px;
 	margin-top: -10px;
 	border-radius: 50%;
@@ -412,7 +404,7 @@ main {
 }
 .cursor.hover {
 	height: 150px;
-	border: 6px solid #0effbd;
+	border: 6px solid var(--Primary);
 	width: 150px;
 	margin-top: -72px;
 	margin-left: -75px;
@@ -422,8 +414,8 @@ main {
 	position: fixed;
 	width: 30px;
 	height: 30px;
-	background: #0effbd;
-	border: 5px solid #182546;
+	background: var(--Primary);
+	border: 5px solid var(--BG-300);
 	border-radius: 50%;
 }
 .cont {
@@ -432,13 +424,13 @@ main {
 	align-items: center;
 }
 .cont section {
-	background: #182546;
+	background: var(--BG-300);
 	width: 55rem;
 	height: 35em;
 	margin-top: 8rem;
 }
 .cont input {
-	outline: 2px solid #0effbd;
+	outline: 2px solid var(--Primary);
 	margin-left: 25px;
 	width: 402px;
 	height: 30px;
@@ -447,7 +439,7 @@ main {
 }
 #mes {
 	margin-left: 25px;
-	outline: 2px solid #0effbd;
+	outline: 2px solid var(--Primary);
 	padding-left: 10px;
 }
 .s-icons {
@@ -458,9 +450,7 @@ main {
 }
 .s-icons img {
 	border-radius: 0;
-}
-
-/* 1440p */
+} /* 1440p */
 @media (width >= 2560px) {
 	h1 {
 		font-size: 5.5rem;

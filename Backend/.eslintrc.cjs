@@ -1,10 +1,10 @@
 module.exports = {
 	root: true,
-	extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
-	parser: "@typescript-eslint/parser",
-	plugins: ["@typescript-eslint"],
+	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+	parser: '@typescript-eslint/parser',
+	plugins: ['@typescript-eslint'],
 	parserOptions: {
-		sourceType: "module",
+		sourceType: 'module',
 		ecmaVersion: 2020
 	},
 	env: {
@@ -15,8 +15,8 @@ module.exports = {
 	overrides: [
 		{
 			parserOptions: {
-				parser: "@typescript-eslint/parser"
+				parser: '@typescript-eslint/parser'
 			}
 		}
 	]
-};
+}

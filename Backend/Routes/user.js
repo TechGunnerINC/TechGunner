@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express'
 import {
 	get,
 	edit,
@@ -8,14 +8,14 @@ import {
 	posts,
 	services,
 	collections
-} from "../Controllers/user.js";
-import { token } from "../Middlewares/auth.js";
-import { v } from "../Middlewares/valid.js";
-const router = Router();
-router.route("/:username").get(get).put(edit, token, v).delete(remove, token);
-router.route("/:username/blogs").get(blogs);
-router.route("/:username/videos").get(videos);
-router.route("/:username/posts").get(posts);
-router.route("/:username/services").get(services);
-router.route("/:username/collections").get(collections);
-export default router;
+} from '../Controllers/user.js'
+import { token } from '../Middlewares/auth.js'
+import { v } from '../Middlewares/valid.js'
+const router = Router()
+router.route('/:username').get(get).put(edit, token, v).delete(remove, token)
+router.route('/:username/blogs').get(blogs)
+router.route('/:username/videos').get(videos)
+router.route('/:username/posts').get(posts)
+router.route('/:username/services').get(services)
+router.route('/:username/collections').get(collections)
+export default router

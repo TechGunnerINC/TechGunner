@@ -1,72 +1,75 @@
-import bcrypt from "bcrypt";
-import { validationResult } from "express-validator";
-import { PrismaClient } from "@prisma/client";
-import { generateToken } from "../Middlewares/auth.js";
+import bcrypt from 'bcrypt'
+import { validationResult } from 'express-validator'
+import { PrismaClient } from '@prisma/client'
+import { generateToken } from '../Middlewares/auth.js'
 
-const p = new PrismaClient();
+const p = new PrismaClient()
 
 const options = {
 	secure: true,
 	httpOnly: true,
-	domain: ".localhost:5173"
-};
+	domain: 'http://localhost:5173'
+}
 const newUser = async (req, res) => {
 	try {
-		const { username, email, password, name } = req.body;
+		const { username, email, password, name } = req.body
 
-		const User = `@${username.toLowerCase().replaceAll(" ", "")}`;
-		const mail = email.toLowerCase().replace(" ", "");
+		const User = `@${username.toLowerCase().replaceAll(' ', '')}`
+		const mail = email.toLowerCase().replace(' ', '')
 
 		if (
-			/[`~!@#$%^&*()=+[\]{}|;:',.<>/?€£¥©®™÷×§¶°¨≠∞µαβγδεζηθικλμνξÄÅÉæÆôöòûùよかとカく➾⟁⟂⟃⟄⟅⟆⟇⟈⟉⟊⟋⟌⟍⟎⟏⟐⟑⟒⟓⟔⟕⟖⟗⟘⟙⟚⟛⟜⟝⟞⟟⟠⟡⟢⟣⟤⟥⟦⟧⟨⟩⟪⟫⟬⟭⟮⟯⟰⟱⟲⟳⟴⟵⟶⟷⟸⟹⟺⟻⟼⟽⟾⟿ÿÖÜø£ß¢₩₱°²³ªº¿⌐¬½¼¡«»┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌αßΓπΣστΦΘδφε∩≡±≥≤⌠⌡≈·√ⁿ²ⱭⱮⱯⱰⱱⱲⱳⱴⱵⱶⱷⱸⱹⱺⱻⱼⱽⱾⱿⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲍⲎⲏⲐⲑⲒⲓⲗⲘⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲲⲳⲴⲵⲶⲷⲸⲹⲺⲻⲼⲽⲾⲿⳀⳁⳄⳅⳆⳇⳈⳉⳊⳋⳌⳍⳎⳏⳐⳑⳒⳓⳔⳕⳖⳗⳘⳙⳚⳛⳜⳝⳞⳟⳠⳡⳢⳣⳤ⳥⳦⳧⳨⳩⳪ⳫⳬⳭⳮ⳯🜀🜁🜂🜃🜄🜅🜆🜇🜈🜉🜊🜋🜌🜍🜎🜏🜐🜑🜒🜓🜔🜕🜖🜗🜘🜙🜚🜛🜜🜝🜞🜟🜠🜡🜢🜣🜤🜥🜦🜧🜨🜩🜪🜫🜬🜭🜮🜯🜰🜱🜲🜳🜴🜵🜶🜷🜸🜹🜺🜻🜼🜽🜾🜿🝀🝁🝂🝃🝄🝅🝆🝇🝈🝉🝊🝋🝌🝍🝎🝏🝐🝑🝒🝓🝔🝕🝖🝗🝘🝙🝚🝛🝜🝝🝞🝟🝠🝡🝢🝣🝤🝥🝦🝧🝨🝩🝪🝫🝬🝭🝮🝯🝰🝱🝲🝳]/.test(
+			/[`~!@#$%^&*()=+[\]{}|;:',.<>/?€£¥©®™÷×§¶°¨≠∞µαβγδεζηθιμνξ➾⟁⟂⟃⟄⟅⟆⟇⟈⟉⟊⟋⟌⟍⟎⟏⟐⟑⟒⟓⟔⟕⟖⟗⟘⟙⟚⟛⟜⟝⟞⟟⟠⟡⟢⟣⟤⟥⟦⟧⟨⟩⟪⟫⟬⟭⟮⟯⟰⟱⟲⟳⟴⟵⟶⟷⟸⟹⟺⟻⟼⟽⟾⟿ÿÖÜø£ß¢₩₱°²³ªº¿⌐¬½¼¡«»┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌αßΓπΣστΦΘδφε∩≡±≥≤⌠⌡≈·√ⁿ²ⱭⱮⱯⱰⱱⱲⱳⱴⱵⱶⱷⱸⱹⱺⱻⱼⱽⱾⱿⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲍⲎⲏⲐⲑⲒⲓⲗⲘⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲲⲳⲴⲵⲶⲷⲸⲹⲺⲻⲼⲽⲾⲿⳀⳁⳄⳅⳆⳇⳈⳉⳊⳋⳌⳍⳎⳏⳐⳑⳒⳓⳔⳕⳖⳗⳘⳙⳚⳛⳜⳝⳞⳟⳠⳡⳢⳣⳤ⳥⳦⳧⳨⳩⳪ⳫⳬⳭⳮ⳯🜀🜁🜂🜃🜄🜅🜆🜇🜈🜉🜊🜋🜌🜍🜎🜏🜐🜑🜒🜓🜔🜕🜖🜗🜘🜙🜚🜛🜜🜝🜞🜟🜠🜡🜢🜣🜤🜥🜦🜧🜨🜩🜪🜫🜬🜭🜮🜯🜰🜱🜲🜳🜴🜵🜶🜷🜸🜹🜺🜻🜼🜽🜾🜿🝀🝁🝂🝃🝄🝅🝆🝇🝈🝉🝊🝋🝌🝍🝎🝏🝐🝑🝒🝓🝔🝕🝖🝗🝘🝙🝚🝛🝜🝝🝞🝟🝠🝡🝢🝣🝤🝥🝦🝧🝨🝩🝪🝫🝬🝭🝮🝯🝰🝱🝲🝳]/.test(
 				username
 			)
 		) {
 			return res.status(400).json({
-				message: "Username cannot contain special characters except for under_scores and hyphens -."
-			});
+				message: 'Username cannot contain special characters except for under_scores and hyphens -.'
+			})
 		}
 
 		if (!username || !email || !password) {
-			return res.status(400).json({ message: "Username Password and E-mail are required" });
+			return res.status(400).json({ message: 'Username Password and E-mail are required' })
 		}
 
-		const errors = validationResult(req);
+		const errors = validationResult(req)
 		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() });
+			return res.status(400).json({ errors: errors.array() })
 		}
 
-		const salt = await bcrypt.genSalt(15);
-		const hash = await bcrypt.hash(password, salt);
+		const salt = await bcrypt.genSalt(15)
+		const hash = await bcrypt.hash(password, salt)
 
 		const user = await p.user.create({
 			data: { username: User, email: mail, password: hash, name }
-		});
+		})
 
-		const token = generateToken(user);
+		const token = generateToken(user)
 
-		return res.status(201).cookie("Token", token, options).json({ user, token });
+		return res
+			.status(201)
+			.cookie('Token', token, options)
+			.json({ user, token, message: 'User created sec' })
 	} catch (err) {
-		console.error(err);
+		console.error(err)
 		if (
-			(err.code === "P2002" && err.meta.target.includes("username")) ||
-			(err.code === "P2002" && err.meta.target.includes("email"))
+			(err.code === 'P2002' && err.meta.target.includes('username')) ||
+			(err.code === 'P2002' && err.meta.target.includes('email'))
 		) {
-			return res.status(409).json({ message: "Username or email already exists" });
+			return res.status(409).json({ message: 'Username or email already exists' })
 		}
 
-		return res.status(500).json({ message: "Something went wrong" });
+		return res.status(500).json({ message: 'Something went wrong' })
 	}
-};
+}
 
 const login = async (req, res) => {
-	const { username, password } = req.body;
+	const { username, password } = req.body
 
 	if (!username || !password) {
-		return res.status(400).json({ message: "Missing username or password" });
+		return res.status(400).json({ message: 'Missing username or password' })
 	}
 
-	const User = `@${username.toLowerCase().replaceAll(" ", "")}`;
+	const User = `@${username.toLowerCase().replaceAll(' ', '')}`
 	try {
 		const result = await p.user.findUnique({
 			where: {
@@ -76,40 +79,40 @@ const login = async (req, res) => {
 				username: true,
 				password: true
 			}
-		});
+		})
 
 		if (result) {
-			const user = result;
+			const user = result
 
-			const match = await bcrypt.compare(password, user.password);
+			const match = await bcrypt.compare(password, user.password)
 
 			if (match) {
-				const token = generateToken(user);
+				const token = generateToken(user)
 
-				return res.status(201).cookie("Token", token, options).json({ user, token });
+				return res.status(201).cookie('Token', token, options).json({ user, token })
 			} else {
-				return res.status(401).json({ message: "Wrong password" });
+				return res.status(401).json({ message: 'Wrong password' })
 			}
 		} else {
-			return res.status(404).json({ message: "User not found" });
+			return res.status(404).json({ message: 'User not found' })
 		}
 	} catch (err) {
-		console.error(err);
-		return res.status(500).json({ message: "Something went wrong" });
+		console.error(err)
+		return res.status(500).json({ message: 'Something went wrong' })
 	}
-};
+}
 
 const logout = async (req, res) => {
 	try {
-		return res.status(200).clearCookie("Token", options);
+		return res.status(200).clearCookie('Token', options)
 	} catch (err) {
-		console.error(err);
-		return res.status(500).json({ message: "Something went wrong" });
+		console.error(err)
+		return res.status(500).json({ message: 'Something went wrong' })
 	}
-};
+}
 const get = async (req, res) => {
 	try {
-		const { username } = req.params;
+		const { username } = req.params
 
 		const result = await p.user.findUnique({
 			where: {
@@ -136,32 +139,32 @@ const get = async (req, res) => {
 				services: true,
 				collections: true
 			}
-		});
+		})
 
 		if (result) {
-			const user = result;
+			const user = result
 
-			return res.status(200).json({ user });
+			return res.status(200).json({ user })
 		} else {
-			return res.status(404).json({ message: "User not found" });
+			return res.status(404).json({ message: 'User not found' })
 		}
 	} catch (err) {
-		console.error(err);
-		return res.status(500).json({ message: "Something went wrong" });
+		console.error(err)
+		return res.status(500).json({ message: 'Something went wrong' })
 	}
-};
+}
 
 const edit = async (req, res) => {
-	const { username } = req.params;
-	const { newUsername, password, about, skills, languages, links, name, email } = req.body;
+	const { username } = req.params
+	const { newUsername, password, about, skills, languages, links, name, email } = req.body
 
 	try {
 		if (username === req.user.username) {
-			const salt = await bcrypt.genSalt(15);
-			const hash = await bcrypt.hash(password, salt);
-			const errors = validationResult(req);
+			const salt = await bcrypt.genSalt(15)
+			const hash = await bcrypt.hash(password, salt)
+			const errors = validationResult(req)
 			if (!errors.isEmpty()) {
-				return res.status(400).json({ errors: errors.array() });
+				return res.status(400).json({ errors: errors.array() })
 			}
 			const result = await p.user.update({
 				where: {
@@ -177,31 +180,31 @@ const edit = async (req, res) => {
 					languages,
 					links
 				}
-			});
+			})
 
-			const user = result;
+			const user = result
 
-			const token = generateToken(user);
+			const token = generateToken(user)
 
-			return res.status(201).cookie("Token", token, options).json({ user, token });
+			return res.status(201).cookie('Token', token, options).json({ user, token })
 		} else {
-			return res.status(403).json({ message: "You are not authorized to update this profile" });
+			return res.status(403).json({ message: 'You are not authorized to update this profile' })
 		}
 	} catch (err) {
-		console.error(err);
+		console.error(err)
 		if (
-			(err.code === "P2002" && err.meta.target.includes("username")) ||
-			err.meta.target.includes("email")
+			(err.code === 'P2002' && err.meta.target.includes('username')) ||
+			err.meta.target.includes('email')
 		) {
-			return res.status(409).json({ message: "Username already exists" });
+			return res.status(409).json({ message: 'Username already exists' })
 		}
 
-		return res.status(500).json({ message: "Something went wrong" });
+		return res.status(500).json({ message: 'Something went wrong' })
 	}
-};
+}
 
 const remove = async (req, res) => {
-	const { username } = req.params;
+	const { username } = req.params
 
 	try {
 		if (username === req.user.username) {
@@ -209,83 +212,83 @@ const remove = async (req, res) => {
 				where: {
 					username
 				}
-			});
+			})
 
 			if (result) {
-				return res.status(200).json({ message: "User deleted successfully" });
+				return res.status(200).json({ message: 'User deleted successfully' })
 			} else {
-				return res.status(404).json({ message: "User not found" });
+				return res.status(404).json({ message: 'User not found' })
 			}
 		} else {
-			return res.status(403).json({ message: "You are not authorized to delete this profile" });
+			return res.status(403).json({ message: 'You are not authorized to delete this profile' })
 		}
 	} catch (err) {
-		console.error(err);
-		return res.status(500).json({ message: "Something went wrong" });
+		console.error(err)
+		return res.status(500).json({ message: 'Something went wrong' })
 	}
-};
+}
 const blogs = async (req, res) => {
 	try {
-		const { username } = req.params;
+		const { username } = req.params
 		const user = await p.user.findUnique({
 			where: {
 				username
 			},
 			include: { blogs: true }
-		});
+		})
 
 		if (user.blogs.length === 0) {
-			return res.json({ message: "No blogs found" });
+			return res.json({ message: 'No blogs found' })
 		}
 
-		res.status(200).json({ blogs: user });
+		res.status(200).json({ blogs: user })
 	} catch (err) {
-		console.error(err);
+		console.error(err)
 	}
-};
+}
 const videos = async (req, res) => {
 	try {
-		const { username } = req.params;
+		const { username } = req.params
 		const user = await p.user.findUnique({
 			where: {
 				username
 			},
 			include: { videos: true }
-		});
+		})
 
 		if (user.videos.length === 0) {
-			return res.json({ message: "No videos found" });
+			return res.json({ message: 'No videos found' })
 		}
 
-		res.status(200).json({ videos: user });
+		res.status(200).json({ videos: user })
 	} catch (err) {
-		console.error(err);
-		return res.status(err.code || 500).json({ message: "Something went wrong" });
+		console.error(err)
+		return res.status(err.code || 500).json({ message: 'Something went wrong' })
 	}
-};
+}
 const posts = async (req, res) => {
 	try {
-		const { username } = req.params;
+		const { username } = req.params
 		const user = await p.user.findUnique({
 			where: {
 				username
 			},
 			include: { post: true }
-		});
+		})
 
 		if (user.post.length === 0) {
-			return res.json({ message: "No posts found" });
+			return res.json({ message: 'No posts found' })
 		}
 
-		res.status(200).json({ posts: user.post });
+		res.status(200).json({ posts: user.post })
 	} catch (err) {
-		console.error(err);
-		return res.status(err.code || 500).json({ message: "Something went wrong" });
+		console.error(err)
+		return res.status(err.code || 500).json({ message: 'Something went wrong' })
 	}
-};
+}
 const services = async (req, res) => {
 	try {
-		const { username } = req.params;
+		const { username } = req.params
 		const user = await p.user.findUnique({
 			where: {
 				username
@@ -293,21 +296,21 @@ const services = async (req, res) => {
 			include: {
 				services: true
 			}
-		});
+		})
 
 		if (user.services.length === 0) {
-			return res.json({ message: "No services found" });
+			return res.json({ message: 'No services found' })
 		}
 
-		res.status(200).json({ services: user.services });
+		res.status(200).json({ services: user.services })
 	} catch (err) {
-		console.error(err);
-		return res.status(err.code || 500).json({ message: "Something went wrong" });
+		console.error(err)
+		return res.status(err.code || 500).json({ message: 'Something went wrong' })
 	}
-};
+}
 const collections = async (req, res) => {
 	try {
-		const { username } = req.params;
+		const { username } = req.params
 		const collections = await p.user.findUnique({
 			where: {
 				username
@@ -315,16 +318,16 @@ const collections = async (req, res) => {
 			include: {
 				collections: true
 			}
-		});
+		})
 
 		if (collections.collections.length === 0) {
-			return res.json({ message: "No collections found" });
+			return res.json({ message: 'No collections found' })
 		}
 
-		res.status(200).json({ collections });
+		res.status(200).json({ collections })
 	} catch (err) {
-		console.error(err);
-		return res.status(err.code || 500).json({ message: "Something went wrong" });
+		console.error(err)
+		return res.status(err.code || 500).json({ message: 'Something went wrong' })
 	}
-};
-export { newUser, login, get, edit, remove, blogs, videos, posts, services, logout, collections };
+}
+export { newUser, login, get, edit, remove, blogs, videos, posts, services, logout, collections }
