@@ -20,7 +20,8 @@
 
 <header>
 	<span class="logo"
-		><a data-sveltekit-preload-data href="/">
+		>
+		<a data-sveltekit-preload-data href="/">
 			<h3>Tech Gunner</h3>
 		</a>
 	</span>
@@ -32,8 +33,7 @@
 				class="s-box"
 				id="sea"
 				placeholder="Search..."
-				autocomplete="off"
-			/>
+				autocomplete="off" />
 			<button type="reset"><i class="fa-solid fa-xmark p-2" /></button>
 			<i class="fa-solid fa-magnifying-glass p-1" />
 		</form>

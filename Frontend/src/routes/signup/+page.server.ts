@@ -31,7 +31,7 @@ export const actions: Actions = {
 			httpOnly: true,
 			secure: true,
 			priority: 'high',
-			path: '/',
+			path: '/'
 		})
 
 		redirect(308, `/profile/${info.data.user.username}`)

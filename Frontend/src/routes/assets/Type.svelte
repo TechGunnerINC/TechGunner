@@ -16,7 +16,7 @@
 		'A UI/UX Designer',
 		'A Student',
 		'A Human',
-		'A Muslim',
+		'A Muslim'
 	]
 
 	let wordIndex = 0

@@ -3,8 +3,7 @@
 	<meta
 		name="description"
 		content="Login to 
-    Tech Gunner"
-	/>
+    Tech Gunner" />
 </svelte:head>
 
 <div class="signup">

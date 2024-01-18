@@ -74,23 +74,20 @@
 	<b class="mt-3 text-lg">Skills</b>
 	<ul>
 		<li>
-			<i class="fa-solid fa-pen icon" /><b>Content Writing</b><b class="skil after:w-[250px]">90%</b
-			>
+			<i class="fa-solid fa-pen icon" /><b>Content Writing</b><b class="skil after:w-[250px]"
+				>90%</b>
 		</li>
 		<li>
 			<i class="fa-solid fa-wand-magic-sparkles icon" /><b>UI/UX Desgining</b><b
-				class="skil after:w-[250px]">90%</b
-			>
+				class="skil after:w-[250px]">90%</b>
 		</li>
 		<li>
 			<i class="fa-solid fa-brain icon" /><b>Creative Thinking/Planing</b><b
-				class="skil after:w-[250px]">90%</b
-			>
+				class="skil after:w-[250px]">90%</b>
 		</li>
 		<li>
 			<i class="fa-solid fa-image icon" /><b>Photo Retouching</b><b class="skil after:w-[250px]"
-				>80%</b
-			>
+				>80%</b>
 		</li>
 		<li>
 			<i class="fa-brands fa-html5 icon" /> <b>HTML</b> <b class="skil after:w-[250px]">80%</b>
@@ -109,8 +106,7 @@
 	<ul>
 		<li>
 			<b>English</b><b class="skil after:w-[255px] eng after:-top-[56px]"
-				>listening, Reading, Writing, and Speaking</b
-			>
+				>listening, Reading, Writing, and Speaking</b>
 		</li>
 		<li><b>Urdu</b><b class="skil after:w-[230px]">listening and Speaking</b></li>
 		<li><b>Hindi</b><b class="skil after:w-[230px]">listening and Speaking</b></li>

@@ -40,8 +40,7 @@
 					class:fa-image={link === '/wallpapers'}
 					class:fa-user={link === '/about'}
 					class:fa-comment={link === '/contact'}
-					class:fa-landmark={link === '/projects'}
-				/><b class="link"
+					class:fa-landmark={link === '/projects'} /><b class="link"
 					>{link === '/explore'
 						? 'Explore'
 						: link === '/messages'
@@ -62,8 +61,7 @@
 														? 'Contact Me'
 														: link === '/projects'
 															? 'Our Projects'
-															: 'Home'}</b
-				>
+															: 'Home'}</b>
 			</a>
 		{/each}
 	</nav>

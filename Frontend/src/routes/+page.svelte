@@ -30,7 +30,6 @@
 			alt="logo"
 			width="550"
 			loading="lazy"
-			class="mx-[75rem] tg-logo mt-[-37rem]"
-		/>
+			class="mx-[75rem] tg-logo mt-[-37rem]" />
 	</section>
 </div>

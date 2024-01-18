@@ -106,8 +106,7 @@
 			<input type="password" name="password" placeholder="Password" id="pass" />
 		</div>
 		<button on:click={copy} type="button" class="material-symbols-outlined copy"
-			>content_copy</button
-		>
+			>content_copy</button>
 		<button type="button" class="material-symbols-outlined show" on:click={show}>visibility</button>
 		<div class="length" />
 		<div class="count"></div>

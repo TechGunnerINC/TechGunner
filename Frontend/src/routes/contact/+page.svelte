@@ -14,14 +14,11 @@
 			<div class="text-center or">or</div>
 			<div class="s-icons">
 				<a target="_blank" href="https://www.instagram.com/techgunner"
-					><img src="ins.png" alt="insta" width="28" /></a
-				>
+					><img src="ins.png" alt="insta" width="28" /></a>
 				<a target="_blank" href="/profile/@techgunner"
-					><img src="favicon.png" alt="tg" width="32" /></a
-				>
+					><img src="favicon.png" alt="tg" width="32" /></a>
 				<a target="_blank" href="https://www.twitter.com/itstechgunner"
-					><img src="x.png" alt="x" width="25" /></a
-				>
+					><img src="x.png" alt="x" width="25" /></a>
 			</div>
 		</form>
 	</section>

@@ -118,20 +118,6 @@ const get = async (req, res) => {
 			where: {
 				username
 			},
-			select: {
-				username: true,
-				name: true,
-				pp: true,
-				about: true,
-				skills: true,
-				followers: true,
-				joined: true,
-				languages: true,
-				links: true,
-				level: true,
-				points: true,
-				verified: true
-			},
 			include: {
 				post: true,
 				blogs: true,
@@ -143,8 +129,15 @@ const get = async (req, res) => {
 
 		if (result) {
 			const user = result
+			let state = 'none'
 
-			return res.status(200).json({ user })
+			if (username === user.username) {
+				state = 'owner'
+			} else if (user.username) {
+				state = 'login'
+			}
+
+			return res.status(200).json({ user, state })
 		} else {
 			return res.status(404).json({ message: 'User not found' })
 		}
@@ -159,7 +152,7 @@ const edit = async (req, res) => {
 	const { newUsername, password, about, skills, languages, links, name, email } = req.body
 
 	try {
-		if (username === req.user.username) {
+		if (username === req.user?.username) {
 			const salt = await bcrypt.genSalt(15)
 			const hash = await bcrypt.hash(password, salt)
 			const errors = validationResult(req)
@@ -207,7 +200,7 @@ const remove = async (req, res) => {
 	const { username } = req.params
 
 	try {
-		if (username === req.user.username) {
+		if (username === req.user?.username) {
 			const result = await p.user.delete({
 				where: {
 					username

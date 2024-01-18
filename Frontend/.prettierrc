@@ -9,5 +9,6 @@
 	"embeddedLanguageFormatting": "auto",
 	"htmlWhitespaceSensitivity": "strict",
 	"semi": false,
-	"svelteIndentScriptAndStyle": true
+	"svelteIndentScriptAndStyle": true,
+	"bracketSameLine": true
 }

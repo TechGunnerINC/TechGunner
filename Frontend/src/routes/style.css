@@ -112,6 +112,7 @@ textarea {
 	border-radius: 3px;
 	font-weight: 700;
 	transition: all 0.3s ease;
+	text-align: center;
 }
 input::placeholder,
 textarea::placeholder {
@@ -450,7 +451,23 @@ main {
 }
 .s-icons img {
 	border-radius: 0;
-} /* 1440p */
+}
+.pro {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 265px;
+	background: var(--BG-300);
+	padding: 50px 0px;
+	gap: 10px;
+	border-radius: 20px;
+	margin-top: 52px;
+}
+.left {
+	align-self: start;
+	margin-left: 11px;
+}
 @media (width >= 2560px) {
 	h1 {
 		font-size: 5.5rem;
