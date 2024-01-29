@@ -1,35 +1,21 @@
 {
-	"name": "tgb",
-	"version": "1.0.0",
-	"description": "",
-	"main": "app.js",
-	"type": "module",
-	"scripts": {
-		"run": "prettier --write . && nodemon ."
-	},
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"@prisma/client": "^5.7.1",
-		"bcrypt": "^5.1.1",
-		"cloudinary": "^1.41.0",
-		"compression": "^1.7.4",
-		"cookie-parser": "^1.4.6",
-		"cors": "^2.8.5",
-		"dotenv": "^16.3.1",
-		"express": "^4.18.2",
-		"express-validator": "^7.0.1",
-		"helmet": "^7.1.0",
-		"jsonwebtoken": "^9.0.2",
-		"multer": "^1.4.5-lts.1",
-		"socket.io": "^4.7.2"
-	},
-	"devDependencies": {
-		"@types/node": "^20.10.1",
-		"eslint": "^8.56.0",
-		"nodemon": "^3.0.1",
-		"prettier": "^3.1.1",
-		"prisma": "^5.7.1",
-		"ts-node": "^10.9.1"
-	}
+  "name": "backend",
+  "version": "1.0.50",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+	"build": "bun build src/index.ts"
+  },
+  "dependencies": {
+    "@elysiajs/bearer": "^0.8.0",
+    "@elysiajs/jwt": "^0.8.0",
+    "@prisma/client": "^5.8.1",
+    "elysia": "latest",
+    "elysia-helmet": "^1.0.2",
+    "elysia-rate-limit": "^2.0.1"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "prisma": "^5.8.1"
+  },
+  "module": "src/index.js"
 }

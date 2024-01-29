@@ -1,0 +1,41 @@
+services:
+  frontend:
+
+    depends_on:
+      - backend
+
+    build: ./frontend
+
+    ports:
+      - 5173:5173
+
+    develop:
+      watch:
+        - path: ./frontend/package.json
+          action: rebuild
+        - path: ./frontend/package-lock.json
+          action: rebuild
+        - path: ./frontend
+          target: /app
+          action: sync
+  backend:
+    build: ./backend
+
+    ports:
+      - 3000:3000
+
+    env_file:
+      - ./backend/.env
+
+    develop:
+      watch:
+        - path: ./backend/package.json
+          action: rebuild
+        - path: ./backend/package-lock.json
+          action: rebuild
+        - path: ./backend
+          target: /app
+          action: sync
+
+volumes:
+  TechGunner:
