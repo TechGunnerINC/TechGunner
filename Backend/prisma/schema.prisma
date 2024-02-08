@@ -4,13 +4,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DB_URL")
+  url      = env("DB")
 }
 
 model user {
   id          String           @id @default(uuid())
   username    String           @unique
-  name        String           @default("Unknown")
+  name        String
   about       String?          @db.Text
   email       String           @unique
   password    String           @db.Text
@@ -18,15 +18,18 @@ model user {
   interests   String[]
   following   following[]
   banner      String?          @db.Text
-  level       Levels           @default(Fresher)
+  skillName   String           @default("No skill were mentioned")
+  skillLevel  String?
+  langName    String           @default("No language was mentioned")
+  langLevel   String?
+  level       Levels           @default(Silent_Soul)
   points      Int              @default(0)
-  skills      String[]         @default(["No skills mentioned"])
+  needs       Int              @default(100)
   links       String[]         @default(["No links provided"])
-  languages   String[]         @default(["No languages specified"])
   verified    Boolean          @default(false)
   pp          String           @default("a") @db.Text
   role        Roles            @default(User)
-  services    service[]
+  gigs        gig[]
   joined      DateTime         @default(now())
   blogs       blog[]
   messages    messages[]
@@ -42,72 +45,73 @@ model collection {
   id    String @id @default(uuid())
   name  String @default("Untitled")
   des   String @default("No Description")
-  user  user   @relation(fields: [owner], references: [id])
+  user  user   @relation(fields: [owner], references: [username], onDelete: Cascade)
   owner String
 }
 
 model following {
   id           Int     @id @default(autoincrement())
   notification Boolean @default(false)
-  user         user    @relation(fields: [uId], references: [id], onDelete: Cascade)
-  uId          String
+  user         user    @relation(fields: [owner], references: [username], onDelete: Cascade)
+  owner        String
 }
 
 model videos {
-  id        String       @id @default(uuid())
-  url       String       @db.Text
+  id        String     @id @default(uuid())
+  url       String     @db.Text
   title     String
-  uid       String
-  des       String       @db.Text
-  published Boolean      @default(false)
-  cover     String       @db.Text
-  created   DateTime     @default(now())
-  updated   DateTime     @updatedAt
-  likes     Int          @default(0)
-  dislikes  Int          @default(0)
-  views     Int          @default(0)
-  category  Categories[]
+  owner     String
+  des       String     @db.Text
+  published Boolean    @default(false)
+  cover     String     @db.Text
+  created   DateTime   @default(now())
+  updated   DateTime   @updatedAt
+  likes     Int        @default(0)
+  dislikes  Int        @default(0)
+  views     Int        @default(0)
+  category  String[]
   tags      String[]
-  user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
+  user      user       @relation(fields: [owner], references: [username], onDelete: Cascade)
   comments  comments[]
   history   history[]
 }
 
 model post {
-  id        String       @id @default(uuid())
-  url       String       @db.Text
+  id        String     @id @default(uuid())
+  url       String     @db.Text
   title     String
-  uid       String
+  owner     String
   des       String
-  published Boolean      @default(false)
-  cover     String       @db.Text
-  created   DateTime     @default(now())
-  updated   DateTime     @updatedAt
-  likes     Int          @default(0)
-  dislikes  Int          @default(0)
-  views     Int          @default(0)
-  category  Categories[]
+  published Boolean    @default(false)
+  cover     String     @db.Text
+  created   DateTime   @default(now())
+  updated   DateTime   @updatedAt
+  likes     Int        @default(0)
+  dislikes  Int        @default(0)
+  views     Int        @default(0)
+  category  String[]
   tags      String[]
-  user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
+  user      user       @relation(fields: [owner], references: [username], onDelete: Cascade)
   comments  comments[]
   history   history[]
 }
 
 model blog {
-  id        String       @id @default(uuid())
+  id        String     @id @default(uuid())
   title     String
-  uid       String
-  des       String       @db.Text
-  published Boolean      @default(false)
-  cover     String       @db.Text
-  created   DateTime     @default(now())
-  updated   DateTime     @updatedAt
-  likes     Int          @default(0)
-  dislikes  Int          @default(0)
-  views     Int          @default(0)
+  owner     String
+  content   String     @db.Text
+  published Boolean    @default(false)
+  cover     String     @db.Text
+  pics      String?    @db.Text
+  created   DateTime   @default(now())
+  updated   DateTime   @updatedAt
+  likes     Int        @default(0)
+  dislikes  Int        @default(0)
+  views     Int        @default(0)
   tags      String[]
-  category  Categories[]
-  user      user         @relation(fields: [uid], references: [id], onDelete: Cascade)
+  category  String[]
+  user      user       @relation(fields: [owner], references: [username], onDelete: Cascade)
   comments  comments[]
   history   history[]
 }
@@ -125,23 +129,23 @@ model comments {
 
 model messages {
   id        String   @id @default(uuid())
-  uid       String
+  owner     String
   message   String
   seen      Boolean  @default(false)
   sent_at   DateTime @default(now())
   edited_at DateTime @updatedAt
-  user      user     @relation(fields: [uid], references: [id], onDelete: Cascade)
+  user      user     @relation(fields: [owner], references: [username], onDelete: Cascade)
 }
 
 model search_history {
   id          String   @id @default(uuid())
-  uid         String
+  owner       String
   query       String
   searched_at DateTime @default(now())
-  user        user     @relation(fields: [uid], references: [id], onDelete: Cascade)
+  user        user     @relation(fields: [owner], references: [username], onDelete: Cascade)
 }
 
-model service {
+model gig {
   id     String    @id @default(uuid())
   title  String
   des    String
@@ -149,25 +153,25 @@ model service {
   cover  String    @db.Text
   stars  Float     @default(0.0)
   review reviews[]
-  user   user      @relation(fields: [uId], references: [id])
-  uId    String
+  user   user      @relation(fields: [owner], references: [username], onDelete: Cascade)
+  owner  String
 }
 
 model reviews {
-  id      Int     @id @default(autoincrement())
-  review  String  @db.Text
-  user    user    @relation(fields: [uId], references: [id])
-  uId     String
-  service service @relation(fields: [sId], references: [id])
-  sId     String
+  id     Int    @id @default(autoincrement())
+  review String @db.Text
+  user   user   @relation(fields: [owner], references: [username], onDelete: Cascade)
+  owner  String
+  gig    gig    @relation(fields: [sId], references: [id], onDelete: Cascade)
+  sId    String
 }
 
 model history {
   id         String   @id @default(uuid())
-  uid        String
+  owner      String
   bid        String?
   watched_at DateTime @default(now())
-  user       user     @relation(fields: [uid], references: [id], onDelete: Cascade)
+  user       user     @relation(fields: [owner], references: [username], onDelete: Cascade)
   blogs      blog?    @relation(fields: [bid], references: [id], onDelete: Cascade)
   videos     videos?  @relation(fields: [vId], references: [id], onDelete: Cascade)
   vId        String?
@@ -188,51 +192,17 @@ enum Roles {
 }
 
 enum Levels {
-  Fresher
-  CyberCeleb
-  ContentCommander
-  NetworkNinja
-}
-
-enum Categories {
-  Technology
-  Sci_Fi
-  Science
-  Astronormy
-  Astrology
-  Entertainment
-  Sports
-  SoftwareEngineering
-  HardwareEngineering
-  AI
-  Gaming
-  GameDevelopment
-  WebDevelopment
-  GraphicDesigning
-  Documentry
-  Animation
-  ESports
-  NetworkEngineering
-  ML
-  Unboxing
-  Theory
-  Space
-  Education
-  Archaeology
-  Physics
-  Rockets
-  Motivation
-  History
-  Mistery
-  Programming
-  DataBases
-  Banking
-  Computers
-  Podcasts
-  VirtualRealty
-  AppDevelopment
-  Interviews
-  Fitness
-  News
-  Drama
+  Cyber_Celeb
+  Content_Commander
+  The_Cosmic_Lion
+  King_of_Content
+  Neon_Ninja
+  Electric_Knight
+  The_Blazing_Beacon
+  Dashing_Diamond
+  Legion_of_Content
+  Silent_Soul
+  Neon_Dragon
+  The_Blazing_Souls_of_Creators
+  The_Content_Wizard
 }
