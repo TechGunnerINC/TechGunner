@@ -15,7 +15,7 @@ services:
           action: rebuild
         - path: ./frontend/package-lock.json
           action: rebuild
-        - path: ./frontend
+        - path: ./frontend/src
           target: /app
           action: sync
   backend:
@@ -33,7 +33,7 @@ services:
           action: rebuild
         - path: ./backend/package-lock.json
           action: rebuild
-        - path: ./backend
+        - path: ./backend/src
           target: /app
           action: sync
 
