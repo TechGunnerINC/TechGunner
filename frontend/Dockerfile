@@ -8,14 +8,8 @@ COPY bun.lockb .
 
 RUN bun install
 
-COPY *.config .
-
-COPY tsconfig.json .
-
-COPY src src
-
-COPY static static
+COPY . .
 
 EXPOSE 5173
 
-CMD bun run dev
+CMD bun --bun run dev
