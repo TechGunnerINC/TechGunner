@@ -1,4 +1,4 @@
-# Our Platform Description
+## Our Platform Description
 
 Ignite your flaming potential on Tech Gunner!
 
@@ -46,58 +46,40 @@ and hold billions of users at the same time.
 
 ## Technology's in use:
 
-Prime Language: `JavaScript`
+[`S`velteKit](https://kit.svelte.dev/docs/introduction) as Frontend Framework
 
-JavaScript Runtime: `Node JS (Will switch to Bun in the future)`
+[`P`ostgresql](https://www.prisma.io/docs/getting-started) as Database
 
-Database: `PostgreSQL`
+[`E`lysia JS](https://elysiajs.com/introduction.html) as Backend Framework
 
-ORM: `Prisma`
+[Typ`e`Script](https://www.typescriptlang.org/docs/) as Prime Language
 
-Backend Framework: `Express JS (will switch to ElysiaJS in the future)`
+[`D`ocker](https://docs.docker.com/) as Containerization Platform
 
-Frontend Framework: `Sveltekit`
+[Bun `JS`](https://bun.sh/docs) as JavaScript Runtime
 
+**I call it the SPEED JS Stack**
+
+## Project Setup
+
+1. **Clone the project**
+
+```shell
+git clone https://github.com/Tech-Gunner/TechGunner.git
+cd TechGunner
+code .
+```
+
+2. **Run this command in your IDE**
+
+`sh init.sh`
+
+## Software Requirements
+
+- [Docker](https://www.docker.com/products/docker-desktop/)
+- [Bun](https://bun.sh)
 ---
 
-## Project Setup & Contributing Guide
-
-1. **Run These Commands in your Terminal**
-
-```bash
-  git clone https://github.com/Tech-Gunner/TechGunner.git
-  cd TechGunner
-  code .
-```
-
-2. **Open Split Terminal in VS code**
-
-3. **Set up Frontend**
-
-```bash
-  cd Frontend
-  npm i
-  npm run dev
-```
-
-4. **Set up Backend**
-
-```bash
-   cd Backend
-   npm i
-   npm run run
-```
-
-5. **Go to the Backend and set up the Environment Variables**
-
-### To contribute. Follow the instructions down below
-
-1.  Create a fork
-2.  Create your feature branch: `git checkout -b my-feature`
-3.  Commit your changes: `git commit -am 'Added some feature'`
-4.  Push to the branch: `git push origin my-new-feature`
-5.  Submit a pull request 🚀
-
+### **If you want to contribute, Make sure to reed [CONTRIBUTING.md](CONTRIBUTING.md)**
 ---
-
 And boom you are good to go. **Help me create the 🌎 better place**
