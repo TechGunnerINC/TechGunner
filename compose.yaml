@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   frontend:
 
@@ -5,6 +7,11 @@ services:
       - backend
 
     build: ./frontend
+
+    networks:
+      - TG
+
+    container_name: Frontend
 
     ports:
       - 5173:5173
@@ -16,10 +23,22 @@ services:
         - path: ./frontend/package-lock.json
           action: rebuild
         - path: ./frontend/src
-          target: /app
+          target: /app/src
           action: sync
+        - path: ./frontend/static
+          target: /app/static
+          action: sync
+          
+    restart: on-failure
+
   backend:
     build: ./backend
+
+    networks:
+      TG:
+        ipv4_address: 172.16.238.10
+    
+    container_name: Backend
 
     ports:
       - 3000:3000
@@ -34,8 +53,14 @@ services:
         - path: ./backend/package-lock.json
           action: rebuild
         - path: ./backend/src
-          target: /app
+          target: /app/src
           action: sync
 
-volumes:
-  TechGunner:
+    restart: on-failure
+
+networks:
+  TG:
+    ipam:
+     driver: default
+     config:
+       - subnet: "172.16.238.0/24"
