@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "bun run --hot src/app.ts",
     "build": "bun build src/app.ts",
-    "lint": "eslint ."
+    "lint": "prettier -c . && eslint .",
+    "format": "prettier -w ."
   },
   "dependencies": {
     "@elysiajs/cors": "^0.8.0",
@@ -17,6 +18,8 @@
   "devDependencies": {
     "@elysiajs/swagger": "^0.8.5",
     "@types/jsonwebtoken": "^9.0.5",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
     "bun-types": "^1.0.26",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
