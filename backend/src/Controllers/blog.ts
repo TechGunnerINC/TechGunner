@@ -39,7 +39,7 @@ const route = new Elysia({ prefix: '/blog' })
 							tags,
 							category,
 							published,
-							// @ts-ignore
+							// @ts-expect-error: v
 							uid: token.id,
 							cover
 						}
@@ -93,7 +93,7 @@ const route = new Elysia({ prefix: '/blog' })
 							tags,
 							category,
 							published,
-							// @ts-ignore
+							// @ts-expect-error: n
 							uid: token.username,
 							cover
 						}

@@ -26,5 +26,6 @@ module.exports = {
 		quotes: ['warn', 'single'],
 		semi: ['error', 'never'],
 		eqeqeq: 'error',
+		'@typescript-eslint/no-explicit-any': 'off',
 	}
 }

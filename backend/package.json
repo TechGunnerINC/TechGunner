@@ -1,32 +1,32 @@
 {
-  "name": "backend",
-  "version": "1.0.50",
-  "scripts": {
-    "dev": "bun run --hot src/app.ts",
-    "build": "bun build src/app.ts",
-    "lint": "prettier -c . && eslint .",
-    "format": "prettier -w ."
-  },
-  "dependencies": {
-    "@elysiajs/cors": "^0.8.0",
-    "@prisma/client": "^5.9.1",
-    "elysia": "^0.8.16",
-    "elysia-helmet": "^1.0.2",
-    "elysia-rate-limit": "^2.0.1",
-    "jsonwebtoken": "^9.0.2"
-  },
-  "devDependencies": {
-    "@elysiajs/swagger": "^0.8.5",
-    "@types/jsonwebtoken": "^9.0.5",
-    "@typescript-eslint/eslint-plugin": "^7.0.1",
-    "@typescript-eslint/parser": "^7.0.1",
-    "bun-types": "^1.0.26",
-    "eslint": "^8.56.0",
-    "prettier": "^3.2.5",
-    "prisma": "^5.9.1"
-  },
-  "trustedDependencies": [
-    "@prisma/client"
-  ],
-  "module": "src/app.js"
+	"name": "backend",
+	"version": "1.0.50",
+	"scripts": {
+		"dev": "bun run --hot src/app.ts",
+		"build": "bun build src/app.ts",
+		"lint": "prettier -c . && eslint .",
+		"format": "prettier -w ."
+	},
+	"dependencies": {
+		"@elysiajs/cors": "^0.8.0",
+		"@prisma/client": "^5.9.1",
+		"elysia": "^0.8.16",
+		"elysia-helmet": "^1.0.2",
+		"elysia-rate-limit": "^2.0.1",
+		"jsonwebtoken": "^9.0.2"
+	},
+	"devDependencies": {
+		"@elysiajs/swagger": "^0.8.5",
+		"@types/jsonwebtoken": "^9.0.5",
+		"@typescript-eslint/eslint-plugin": "^7.0.1",
+		"@typescript-eslint/parser": "^7.0.1",
+		"bun-types": "^1.0.26",
+		"eslint": "^8.56.0",
+		"prettier": "^3.2.5",
+		"prisma": "^5.9.1"
+	},
+	"trustedDependencies": [
+		"@prisma/client"
+	],
+	"module": "src/app.js"
 }
