@@ -1,4 +1,4 @@
-## Our Platform Description
+## Introduction
 
 Ignite your flaming potential on Tech Gunner!
 
@@ -44,21 +44,28 @@ and hold billions of users at the same time.
 
 ---
 
+## Goals of this project:
+
+- Make the internet and world a better place
+  - Islamic friendly content only (only content that is allowed in islam)
+  - Make the world eco-friendly
+  - Reed the about me page if you want to know more goals
+- Be in the top 10
+  - Social media
+  - Multitasking
+  - Streaming
+  - Messaging
+  - And open source platforms
+
 ## Technology's in use:
 
-[`S`velteKit](https://kit.svelte.dev/docs/introduction) as Frontend Framework
-
-[`P`ostgresql](https://www.prisma.io/docs/getting-started) as Database
-
-[`E`lysia JS](https://elysiajs.com/introduction.html) as Backend Framework
-
-[Typ`e`Script](https://www.typescriptlang.org/docs/) as Prime Language
-
-[`D`ocker](https://docs.docker.com/) as Containerization Platform
-
-[Bun `JS`](https://bun.sh/docs) as JavaScript Runtime
-
-**I call it the SPEED JS Stack**
+- SPEED JS:
+  - `S`velteKit as Frontend Framework - [Docs](https://kit.svelte.dev/docs/introduction)
+  - `P`ostgresql as Database - [Docs](https://prisma.io/docs/getting-started) (Prisma)
+  - `E`lysia JS as Backend Framework - [Docs](https://elysiajs.com/introduction.html)
+  - Typ`e`Script as Prime Language - [Docs](https://typescriptlang.org/docs/)
+  - `D`ocker as Containerization Platform - [Docs](https://docs.docker.com/)
+  - Bun `JS` as JavaScript Runtime - [Docs](https://bun.sh/docs)
 
 ## Project Setup
 
@@ -69,17 +76,20 @@ git clone https://github.com/Tech-Gunner/TechGunner.git
 cd TechGunner
 code .
 ```
-
-2. **Run this command in your IDE**
+2. **Go to the backend folder and set up the Environment variables**
+2. **Run this command in your IDE to initialize and setup the project**
 
 `sh init.sh`
 
 ## Software Requirements
 
-- [Docker](https://www.docker.com/products/docker-desktop/)
+- [Docker](https://docker.com/products/docker-desktop/)
 - [Bun](https://bun.sh)
+
 ---
 
-### **If you want to contribute, Make sure to reed [CONTRIBUTING.md](CONTRIBUTING.md)**
+#### **If you want to contribute, Make sure to reed [CONTRIBUTING.md](CONTRIBUTING.md)**
+
 ---
+
 And boom you are good to go. **Help me create the 🌎 better place**

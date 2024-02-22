@@ -1,14 +1,14 @@
-## Contributing to Tech Gunner
+# Contributing to Tech Gunner
 
 This document outlines the guidelines for contributing to the Tech Gunner on GitHub. We welcome your contributions and appreciate your willingness to help us build a better platform!
 
-**Before you start:**
+### **Before you start:**
 
-* Please make sure you have read and understood the project's README.md file.
-* Ensure you have Docker and Bun installed on your system. 
-* Go and learn the technologies used in SPEED JS, if you're unfamiliar.
+- Please make sure you have read and understood the project's README.md file.
+- Ensure you have Docker and Bun installed on your system.
+- Go and learn the technologies used in SPEED JS, if you're unfamiliar.
 
-**Getting Started:**
+### **Getting Started:**
 
 1. **Fork the repository:** Create a fork of the Tech Gunner repository on GitHub.
 2. **Clone your fork:** Clone your forked repository to your local machine.
@@ -18,25 +18,25 @@ This document outlines the guidelines for contributing to the Tech Gunner on Git
 6. **Push your changes:** Push your changes to your fork on GitHub.
 7. **Create a pull request:** Create a pull request to the main repository, describing your changes and their purpose.
 
-**Contribution Guidelines:**
+### **Contribution Guidelines:**
 
-* Make sure to run bunx format when you're done making changes.
-* Write clean and well-documented code.
-* Ensure to test your changes, Before committing.
-* Provide clear and concise descriptions in your pull request.
-* Be respectful and professional in your communication with other contributors.
-* Write user friendly error messages.
+- Make sure to run bun format when you're done making changes.
+- Write clean and understandable code.
+- Ensure to test your changes, Before committing.
+- Provide clear and concise descriptions in your pull request.
+- Be respectful and professional in your communication with other contributors.
+- Write user friendly error messages.
 
-**Pull Request Review:**
+### **Pull Request Review:**
 
-* All pull requests will be reviewed by me.
-* We may request changes to your code before merging your pull request.
-* We appreciate your patience and understanding during the review process.
+- All pull requests will be reviewed by me.
+- We may request changes to your code before merging your pull request.
+- We appreciate your patience and understanding during the review process.
 
-**Additional Notes:**
+### **Additional Notes:**
 
-* We reserve the right to reject any contribution that does not meet our standards or is not aligned with the project's goals.
-* By contributing to this project, you agree to license your contributions under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.
+- We reserve the right to reject any contribution that does not meet our standards or is not aligned with the project's goals.
+- By contributing to this project, you agree to license your contributions under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.
 
 **We appreciate your contributions!**
 
