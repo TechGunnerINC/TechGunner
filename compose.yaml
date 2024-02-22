@@ -36,8 +36,7 @@ services:
 
     networks:
       TG:
-        ipv4_address: 172.16.238.10
-    
+
     container_name: Backend
 
     ports:
