@@ -10,5 +10,6 @@
 	"htmlWhitespaceSensitivity": "strict",
 	"semi": false,
 	"svelteIndentScriptAndStyle": true,
-	"bracketSameLine": true
+	"bracketSameLine": true,
+	"endOfLine": "lf"
 }

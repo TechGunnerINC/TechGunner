@@ -19,8 +19,7 @@
 </script>
 
 <header>
-	<span class="logo"
-		>
+	<span class="logo">
 		<a data-sveltekit-preload-data href="/">
 			<h3>Tech Gunner</h3>
 		</a>

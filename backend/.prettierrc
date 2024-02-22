@@ -4,5 +4,6 @@
 	"trailingComma": "none",
 	"printWidth": 100,
 	"semi": false,
-	"bracketSpacing": true
+	"bracketSpacing": true,
+	"endOfLine": "lf"
 }
