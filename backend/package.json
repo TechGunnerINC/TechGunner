@@ -10,6 +10,7 @@
 	"dependencies": {
 		"@elysiajs/cors": "^0.8.0",
 		"@prisma/client": "^5.10.2",
+		"bcrypt": "^5.1.1",
 		"elysia": "^0.8.17",
 		"elysia-helmet": "^1.0.2",
 		"elysia-rate-limit": "^2.0.1",
@@ -17,6 +18,7 @@
 	},
 	"devDependencies": {
 		"@elysiajs/swagger": "^0.8.5",
+		"@types/bcrypt": "^5.0.2",
 		"@types/jsonwebtoken": "^9.0.5",
 		"@typescript-eslint/eslint-plugin": "^7.0.2",
 		"@typescript-eslint/parser": "^7.0.2",
@@ -26,7 +28,8 @@
 		"prisma": "^5.10.2"
 	},
 	"trustedDependencies": [
-		"@prisma/client"
+		"@prisma/client",
+		"bcrypt"
 	],
 	"module": "src/app.js"
 }

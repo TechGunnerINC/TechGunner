@@ -1,6 +1,7 @@
 import { CookieOptions, Elysia, t } from 'elysia'
 import { PrismaClient } from '@prisma/client'
 import { GenToken, checkState, verify } from '../Libs/auth'
+import bcrypt from 'bcrypt'
 
 export const options = {
 	domain: process.env.DOMAIN,
@@ -42,7 +43,8 @@ const route = new Elysia()
 							name = username
 						}
 
-						const hash = await Bun.password.hash(password)
+						const salt = await bcrypt.genSalt(10)
+						const hash = await bcrypt.hash(password, salt)
 
 						const user = await db.user.create({
 							data: {
@@ -117,7 +119,7 @@ const route = new Elysia()
 						})
 
 						if (user) {
-							const match = await Bun.password.verify(password, user.password)
+							const match = await bcrypt.compare(password, user.password)
 
 							if (match) {
 								const token = GenToken(user)
@@ -217,7 +219,8 @@ const route = new Elysia()
 						const token = checkState(auth.value, username)
 
 						if (token === 'Owner') {
-							const hash = await Bun.password.hash(password)
+							const salt = await bcrypt.genSalt(10)
+							const hash = await bcrypt.hash(password, salt)
 
 							const user = await db.user.update({
 								where: {
@@ -296,7 +299,7 @@ const route = new Elysia()
 								select: { password: true }
 							})
 							if (user) {
-								const correct = await Bun.password.verify(password, user.password)
+								const correct = await bcrypt.compare(password, user.password)
 								if (correct) {
 									await db.user.delete({
 										where: {
