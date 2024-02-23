@@ -15,10 +15,14 @@ body:
     attributes:
       label: What is the expected behavior?
       description: If possible, please provide text instead of a screenshot.
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: What do you see instead?
       description: If possible, please provide text instead of a screenshot.
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: What steps can reproduce the bug?
