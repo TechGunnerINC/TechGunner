@@ -28,14 +28,14 @@ services:
         - path: ./frontend/static
           target: /app/static
           action: sync
-          
+
     restart: on-failure
 
   backend:
     build: ./backend
-
+    
     networks:
-      TG:
+      - TG
 
     container_name: Backend
 
@@ -59,7 +59,4 @@ services:
 
 networks:
   TG:
-    ipam:
-     driver: default
-     config:
-       - subnet: "172.16.238.0/24"
+    driver: bridge
