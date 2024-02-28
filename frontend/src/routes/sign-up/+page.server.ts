@@ -25,13 +25,6 @@ export const actions: Actions = {
 			{ withCredentials: true }
 		)
 
-		cookies.set('auth', info.data.token, {
-			httpOnly: true,
-			secure: true,
-			priority: 'high',
-			path: '/'
-		})
-
 		redirect(308, `/profile/${info.data.user.username}`)
 	}
 }

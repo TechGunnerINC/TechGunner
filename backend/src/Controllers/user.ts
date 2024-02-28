@@ -1,7 +1,15 @@
-import { Elysia, t } from 'elysia'
+import { CookieOptions, Elysia, t } from 'elysia'
 import { PrismaClient } from '@prisma/client'
-import { GenToken, checkState } from '../Libs/auth'
+import { GenToken, checkState, verify } from '../Libs/auth'
 import bcrypt from 'bcrypt'
+
+export const options = {
+	domain: process.env.DOMAIN,
+	maxAge: 30758400,
+	httpOnly: true,
+	secure: true,
+	priority: 'high'
+} as CookieOptions
 
 const db = new PrismaClient()
 
@@ -10,7 +18,7 @@ const route = new Elysia()
 		route
 			.post(
 				'/sign-up',
-				async ({ body, set }) => {
+				async ({ body, set, cookie: { auth } }) => {
 					try {
 						const { username, email, password } = body
 						let { name } = body
@@ -53,6 +61,10 @@ const route = new Elysia()
 						})
 
 						const token = GenToken(user)
+						console.log(token, verify(token, set))
+
+						auth.property = options
+						auth.value = token
 
 						return { user, token }
 					} catch (e: any) {
@@ -84,7 +96,7 @@ const route = new Elysia()
 
 			.post(
 				'/login',
-				async ({ body, set }) => {
+				async ({ body, set, cookie: { auth } }) => {
 					try {
 						const { username, password } = body
 
@@ -114,6 +126,9 @@ const route = new Elysia()
 
 								set.status = 201
 
+								auth.property = options
+								auth.value = token
+
 								return { token }
 							} else {
 								set.status = 400
@@ -127,6 +142,15 @@ const route = new Elysia()
 				},
 				{ body: t.Object({ username: t.String(), password: t.String() }) }
 			)
+
+			.post('/logout', ({ cookie: { auth }, set }) => {
+				try {
+					auth.remove(options)
+				} catch (e: any) {
+					set.status = 500
+					console.error(e)
+				}
+			})
 	)
 	.group('/profile/:username', (route) =>
 		route
@@ -217,6 +241,9 @@ const route = new Elysia()
 							})
 
 							const token = GenToken(user)
+
+							auth.property = options
+							auth.value = token
 
 							return { user, token }
 						} else {
