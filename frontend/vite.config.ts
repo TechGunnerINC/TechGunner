@@ -3,6 +3,5 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
 	plugins: [sveltekit()],
-	server: { strictPort: true },
-	publicDir: 'static'
+	server: { strictPort: true }
 })
