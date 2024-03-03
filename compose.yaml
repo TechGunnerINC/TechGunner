@@ -20,7 +20,7 @@ services:
       watch:
         - path: ./frontend/package.json
           action: rebuild
-        - path: ./frontend/package-lock.json
+        - path: ./frontend/bun.lockb
           action: rebuild
         - path: ./frontend/src
           target: /app/src
@@ -49,7 +49,7 @@ services:
       watch:
         - path: ./backend/package.json
           action: rebuild
-        - path: ./backend/package-lock.json
+        - path: ./backend/bun.lockb
           action: rebuild
         - path: ./backend/src
           target: /app/src
