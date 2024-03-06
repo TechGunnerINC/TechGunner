@@ -2,13 +2,16 @@ FROM oven/bun:alpine
 
 WORKDIR /app
 
-COPY package.json ./
+COPY *.json ./
 
 COPY bun.lockb .
 
 RUN bun install
 
-COPY . .
+COPY .svelte-kit .svelte-kit
+COPY *.config.* ./
+COPY static static
+COPY src src
 
 EXPOSE 5173
 
