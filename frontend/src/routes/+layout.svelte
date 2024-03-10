@@ -1,8 +1,8 @@
 <script>
 	import './style.css'
-	import Header from './assets/Header.svelte'
-	import Side from './assets/Side.svelte'
-	import Cursor from './assets/Cursor.svelte'
+	import Header from './components/Header.svelte'
+	import Side from './components/Side.svelte'
+	import Cursor from './components/Cursor.svelte'
 </script>
 
 <Header />
