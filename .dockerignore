@@ -8,7 +8,6 @@
 **/.toolstarget
 **/.vs
 **/.vscode
-**/.svelte-kit
 **/.cache
 **/*.*proj.user
 **/*.dbmdl

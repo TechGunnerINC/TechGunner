@@ -1,6 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -19,10 +18,8 @@ model user {
   interests   String[]
   following   following[]
   banner      String?          @db.Text
-  skillName   String           @default("No skill were mentioned")
-  skillLevel  String?
-  langName    String           @default("No language was mentioned")
-  langLevel   String?
+  skills      Json[]
+  languages   Json[]
   level       Levels           @default(Silent_Soul)
   points      Int              @default(0)
   needs       Int              @default(100)
@@ -51,7 +48,7 @@ model collection {
 }
 
 model following {
-  id           Int     @id @default(autoincrement())
+  id           String  @id @default(cuid())
   notification Boolean @default(false)
   user         user    @relation(fields: [owner], references: [username], onDelete: Cascade)
   owner        String
@@ -159,7 +156,7 @@ model gig {
 }
 
 model reviews {
-  id     Int    @id @default(autoincrement())
+  id     String @id @default(cuid())
   review String @db.Text
   user   user   @relation(fields: [owner], references: [username], onDelete: Cascade)
   owner  String

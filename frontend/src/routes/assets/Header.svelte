@@ -40,5 +40,5 @@
 
 	<a data-sveltekit-preload-data href="/login" class="sec log">Login</a>
 
-	<a data-sveltekit-preload-data href="/signup" class="prime sign">Sign up</a>
+	<a data-sveltekit-preload-data href="/sign-up" class="prime sign">Sign up</a>
 </header>

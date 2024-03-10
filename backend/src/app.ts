@@ -31,9 +31,12 @@ app
 	)
 	.use(user)
 	.use(blog)
-	.onResponse(() => {
-		console.log(`response speed was: ${performance.now()}ms`)
+	.onAfterHandle(({ request }) => {
+		const startTime = process.hrtime()
+		const endTime = process.hrtime(startTime)
+		const startupTimeInMs = endTime[0] * 1e3 + endTime[1] / 1e6
+		console.log(`Startup time: ${startupTimeInMs.toFixed(2)} ms`)
 	})
-	.listen(process.env.PORT || 5000)
-
-console.log(`Server running on ${app.server?.url}`)
+	.listen(process.env.PORT || 5000, () => {
+		console.log(`Server running on ${app.server?.url}`)
+	})

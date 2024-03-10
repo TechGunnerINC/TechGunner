@@ -10,6 +10,8 @@
 	onMount(() => {
 		const pass = document.querySelector('#pass') as HTMLInputElement
 		const gen = document.querySelector('.gen') as HTMLButtonElement
+		const name = document.querySelector('[name="name"]') as HTMLInputElement
+		const username = document.querySelector('.use') as HTMLInputElement
 
 		gen.onclick = () => {
 			pass.value = genPass(int(50, 85))
@@ -18,6 +20,9 @@
 		check()
 		pass.oninput = check
 		pass.onfocus = check
+		username.oninput = () => {
+			name.value = username.value
+		}
 	})
 
 	function show() {

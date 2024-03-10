@@ -12,8 +12,7 @@ const route = new Elysia()
 				'/sign-up',
 				async ({ body, set }) => {
 					try {
-						const { username, email, password } = body
-						let { name } = body
+						const { username, email, password, name } = body
 
 						if (
 							/[`~!@#$%^&*()=+[\]|;:',.<>/?€£¥©®™÷×§¶°¨≠∞µαβγδεζηθιμνξ➾⟁⟂⟃⟄⟅⟆⟇⟈⟉⟊⟋⟌⟍⟎⟏⟐⟑⟒⟓⟔⟕⟖⟗⟘⟙⟚⟛⟜⟝⟞⟟⟠⟡⟢⟣⟤⟥⟦⟧⟨⟩⟪⟫⟬⟭⟮⟯⟰⟱⟲⟳⟴⟵⟶⟷⟸⟹⟺⟻⟼⟽⟾⟿ÿÖÜø£ß¢₩₱°²³ªº¿⌐¬½¼¡«»┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌αßΓπΣστΦΘδφε∩≡±≥≤⌠⌡≈·√ⁿ²ⱭⱮⱯⱰⱱⱲⱳⱴⱵⱶⱷⱸⱹⱺⱻⱼⱽⱾⱿⲀⲁⲂⲃⲄⲅⲆⲇⲈⲉⲊⲋⲌⲍⲎⲏⲐⲑⲒⲓⲗⲘⲜⲝⲞⲟⲠⲡⲢⲣⲤⲥⲦⲧⲨⲩⲪⲫⲬⲭⲮⲯⲲⲳⲴⲵⲶⲷⲸⲹⲺⲻⲼⲽⲾⲿⳀⳁⳄⳅⳆⳇⳈⳉⳊⳋⳌⳍⳎⳏⳐⳑⳒⳓⳔⳕⳖⳗⳘⳙⳚⳛⳜⳝⳞⳟⳠⳡⳢⳣⳤ⳥⳦⳧⳨⳩⳪ⳫⳬⳭⳮ🜀🜁🜂🜃🜄🜅🜆🜇🜈🜉🜊🜋🜌🜍🜎🜏🜐🜑🜒🜓🜔🜕🜖🜗🜘🜙🜚🜛🜜🜝🜞🜟🜠🜡🜢🜣🜤🜥🜦🜧🜨🜩🜪🜫🜬🜭🜮🜯🜰🜱🜲🜳🜴🜵🜶🜷🜸🜹🜺🜻🜼🜽🜾🜿🝀🝁🝂🝃🝄🝅🝆🝇🝈🝉🝊🝋🝌🝍🝎🝏🝐🝑🝒🝓🝔🝕🝖🝗🝘🝙🝚🝛🝜🝝🝞🝟🝠🝡🝢🝣🝤🝥🝦🝧🝨🝩🝪🝫🝬🝭🝮🝯🝰🝱🝲🝳]/u.test(
@@ -31,19 +30,17 @@ const route = new Elysia()
 							return { msg: 'Username Password and E-mail are required' }
 						}
 
-						if (!name) {
-							name = username
-						}
-
 						const salt = await bcrypt.genSalt(10)
 						const hash = await bcrypt.hash(password, salt)
 
 						const user = await db.user.create({
 							data: {
 								username: `@${username.toLowerCase().replaceAll(' ', '')}`,
-								email: email.toLowerCase(),
+								email: email.toLowerCase().replaceAll(' ', ''),
 								password: hash,
-								name
+								name,
+								languages: [{ name: null, level: null }],
+								skills: [{ name: null, level: null }]
 							},
 							select: {
 								id: true,
@@ -130,7 +127,7 @@ const route = new Elysia()
 	)
 	.group('/profile/:username', (route) =>
 		route
-			.get('/', async ({ params, set, cookie: { auth } }) => {
+			.get('/', async ({ params, set }) => {
 				try {
 					const { username } = params
 
@@ -149,10 +146,8 @@ const route = new Elysia()
 							joined: true,
 							verified: true,
 							links: true,
-							skillLevel: true,
-							skillName: true,
-							langName: true,
-							langLevel: true,
+							skills: true,
+							languages: true,
 							level: true,
 							needs: true,
 							points: true
@@ -160,10 +155,8 @@ const route = new Elysia()
 					})
 
 					if (user) {
-						const state = checkState(auth.value, user.username)
 						return {
-							user,
-							state
+							user
 						}
 					} else {
 						set.status = 404
@@ -180,18 +173,7 @@ const route = new Elysia()
 				async ({ params, body, cookie: { auth }, set }) => {
 					try {
 						const { username } = params
-						const {
-							newUsername,
-							password,
-							about,
-							skillName,
-							skillLevel,
-							langName,
-							langLevel,
-							links,
-							name,
-							email
-						} = body
+						const { newUsername, password, about, skills, languages, links, name, email } = body
 						const token = checkState(auth.value, username)
 
 						if (token === 'Owner') {
@@ -209,10 +191,8 @@ const route = new Elysia()
 									email,
 									about,
 									links,
-									skillName,
-									skillLevel,
-									langName,
-									langLevel
+									skills,
+									languages
 								}
 							})
 
@@ -251,10 +231,8 @@ const route = new Elysia()
 						name: t.String({ maxLength: 20, error: 'Name can not be longer than 20 characters' }),
 						about: t.String(),
 						links: t.Array(t.String()),
-						skillName: t.String({ maxLength: 20 }),
-						skillLevel: t.String(),
-						langLevel: t.String(),
-						langName: t.String()
+						skills: t.Object({ name: t.String(), level: t.String() }),
+						languages: t.Object({ name: t.String(), level: t.String() })
 					})
 				}
 			)

@@ -59,7 +59,7 @@ const route = new Elysia({ prefix: '/blog' })
 	)
 	.get('/', ({ set }) => {
 		try {
-			return db.blog.findMany({ take: 500 })
+			return db.blog.findMany({ where: { published: true }, take: 500 })
 		} catch (e: any) {
 			console.error(e)
 			set.status = 500
