@@ -170,11 +170,11 @@ const route = new Elysia()
 
 			.put(
 				'/',
-				async ({ params, body, cookie: { auth }, set }) => {
+				async ({ params, body, set }) => {
 					try {
 						const { username } = params
 						const { newUsername, password, about, skills, languages, links, name, email } = body
-						const token = checkState(auth.value, username)
+						const token = checkState(body.auth, username)
 
 						if (token === 'Owner') {
 							const salt = await bcrypt.genSalt(10)
@@ -231,19 +231,20 @@ const route = new Elysia()
 						name: t.String({ maxLength: 20, error: 'Name can not be longer than 20 characters' }),
 						about: t.String(),
 						links: t.Array(t.String()),
-						skills: t.Object({ name: t.String(), level: t.String() }),
-						languages: t.Object({ name: t.String(), level: t.String() })
+						skills: t.Array(t.Object({ name: t.String(), level: t.String() })),
+						languages: t.Array(t.Object({ name: t.String(), level: t.String() })),
+						auth: t.String()
 					})
 				}
 			)
 
 			.delete(
 				'/',
-				async ({ set, body, cookie: { auth }, params }) => {
+				async ({ set, body, params }) => {
 					try {
 						const { username } = params
 						const { password } = body
-						const token = await checkState(auth.value, username)
+						const token = await checkState(body.auth, username)
 						if (token === 'Owner') {
 							const user = await db.user.findUnique({
 								where: { username },
@@ -274,7 +275,10 @@ const route = new Elysia()
 						console.error(e)
 					}
 				},
-				{ params: t.Object({ username: t.String() }), body: t.Object({ password: t.String() }) }
+				{
+					params: t.Object({ username: t.String() }),
+					body: t.Object({ password: t.String(), auth: t.String() })
+				}
 			)
 			.get('/blogs', async ({ params, set }) => {
 				try {

@@ -20,17 +20,18 @@ const bodySchema = {
 			error: 'You cannot add more than 10 categories to your blog'
 		}),
 		published: t.Boolean(),
-		cover: t.String()
+		cover: t.String(),
+		auth: t.String()
 	})
 }
 
 const route = new Elysia({ prefix: '/blog' })
 	.post(
 		'/',
-		async ({ body, cookie: { auth }, set }) => {
+		async ({ body, set }) => {
 			try {
-				const { title, content, tags, category, published, cover } = body
-				const token = verify(auth.value, set)
+				const { title, content, tags, category, published, cover, auth } = body
+				const token = verify(auth, set)
 				if (token) {
 					const blog = await db.blog.create({
 						data: {
@@ -79,10 +80,10 @@ const route = new Elysia({ prefix: '/blog' })
 	})
 	.put(
 		'/:id',
-		async ({ params, body, cookie: { auth }, set }) => {
+		async ({ params, body, set }) => {
 			try {
 				const uid = await db.blog.findUnique({ where: { id: params.id }, select: { owner: true } })
-				const token = checkState(auth.value, uid?.owner)
+				const token = checkState(body.auth, uid?.owner)
 				if (token === 'Owner') {
 					const { title, content, tags, category, published, cover } = body
 					const blog = await db.blog.update({
@@ -111,21 +112,25 @@ const route = new Elysia({ prefix: '/blog' })
 		},
 		bodySchema
 	)
-	.delete('/:id', async ({ params, cookie: { auth }, set }) => {
-		try {
-			const uid = await db.blog.findUnique({ where: { id: params.id }, select: { owner: true } })
-			const token = checkState(auth.value, uid?.owner)
-			if (token === 'Owner') {
-				await db.blog.delete({ where: { id: params.id } })
-				return { msg: 'Blog deleted successfully' }
-			} else {
-				set.status = 401
-				return { msg: 'You are not authorized to delete this blog' }
+	.delete(
+		'/:id',
+		async ({ params, set, body }) => {
+			try {
+				const uid = await db.blog.findUnique({ where: { id: params.id }, select: { owner: true } })
+				const token = checkState(body.auth, uid?.owner)
+				if (token === 'Owner') {
+					await db.blog.delete({ where: { id: params.id } })
+					return { msg: 'Blog deleted successfully' }
+				} else {
+					set.status = 401
+					return { msg: 'You are not authorized to delete this blog' }
+				}
+			} catch (e: any) {
+				set.status = 500
+				console.error(e)
 			}
-		} catch (e: any) {
-			set.status = 500
-			console.error(e)
-		}
-	})
+		},
+		{ body: t.Object({ auth: t.String() }) }
+	)
 
 export default route
