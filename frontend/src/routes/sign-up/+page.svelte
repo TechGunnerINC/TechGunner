@@ -2,10 +2,6 @@
 	import { onMount } from 'svelte'
 	import { enhance } from '$app/forms'
 	import { genPass, int } from '$lib/Random'
-	import { goto } from '$app/navigation'
-	import type { Actions } from './$types'
-
-	let Form: Actions
 
 	onMount(() => {
 		const pass = document.querySelector('#pass') as HTMLInputElement
