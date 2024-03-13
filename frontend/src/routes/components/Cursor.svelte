@@ -1,34 +1,48 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount, onDestroy } from 'svelte'
+
 	let x = 0
 	let y = 0
-	let cursor: any
-	let ho = false
+	let hover = false
+
+	let elements
+
+	const handleMouseMove = (event) => {
+		x = event.clientX
+		y = event.clientY
+	}
+
+	const handleHover = () => {
+		hover = true
+	}
+
+	const handleHoverExit = () => {
+		hover = false
+	}
 
 	onMount(() => {
-		cursor = document.querySelector('.cursor')
-		document.addEventListener('mousemove', (e) => {
-			x = e.clientX
-			y = e.clientY
-		})
+		if (typeof document !== 'undefined') {
+			document.addEventListener('mousemove', handleMouseMove)
 
-		document.querySelectorAll('a, img, button').forEach((element) => {
-			element.addEventListener('mouseenter', () => {
-				ho = true
-				cursor.classList.add('hover')
-			})
-			element.addEventListener('mouseleave', () => {
-				ho = false
-				cursor.classList.remove('hover')
-			})
-		})
+			elements = document.querySelectorAll('img, a, button')
 
-		const animate = () => {
-			cursor.style.transform = `translate(${x}px, ${y}px)`
-			requestAnimationFrame(animate)
+			elements.forEach((element) => {
+				element.addEventListener('mouseover', handleHover)
+				element.addEventListener('mouseout', handleHoverExit)
+			})
 		}
-		animate()
+	})
+
+	onDestroy(() => {
+		if (typeof document !== 'undefined') {
+			document.removeEventListener('mousemove', handleMouseMove)
+
+			elements.forEach((element) => {
+				element.removeEventListener('mouseover', handleHover)
+				element.removeEventListener('mouseout', handleHoverExit)
+			})
+		}
 	})
 </script>
 
-<div class="cursor" style="top: {y}; left: {x};" />
+<div class="cursor" class:hover style="left: {x}px; top: {y}px;" />
