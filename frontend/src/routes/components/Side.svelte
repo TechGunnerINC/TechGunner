@@ -14,6 +14,9 @@
 			if ((e.ctrlKey && e.key == ' ') || (e.metaKey && e.key == ' ')) {
 				open()
 			}
+			if (e.key === 'Escape' && show === true) {
+				show = false
+			}
 		})
 	})
 </script>
