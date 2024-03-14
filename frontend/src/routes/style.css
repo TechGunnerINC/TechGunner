@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Saira Semi Condensed:700|Saira Semi Condensed:400');
+@import url('https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@400;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -50,7 +50,7 @@ h3,
 h4,
 h5,
 b {
-	font-weight: 700;
+	font-weight: 600;
 }
 h1 {
 	font-size: 3.5rem;
@@ -110,7 +110,7 @@ textarea {
 .sec {
 	padding: 3px 15px;
 	border-radius: 3px;
-	font-weight: 700;
+	font-weight: 600;
 	transition: all 0.3s ease;
 	text-align: center;
 }
