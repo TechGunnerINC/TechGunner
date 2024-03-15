@@ -31,9 +31,12 @@ services:
 
     restart: on-failure
 
+    volumes:
+      - frontend:/app
+
   backend:
     build: ./backend
-    
+
     networks:
       - TG
 
@@ -57,6 +60,13 @@ services:
 
     restart: on-failure
 
+    volumes:
+      - backend:/app
+
 networks:
   TG:
     driver: bridge
+
+volumes:
+  frontend:
+  backend:
