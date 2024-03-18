@@ -105,6 +105,7 @@ textarea {
 	border-radius: 5px;
 	color: #fff;
 	resize: none;
+	caret-color: var(--Primary);
 }
 .prime,
 .sec {
@@ -186,7 +187,7 @@ header {
 nav {
 	z-index: 110;
 	overflow-y: auto;
-	background: #0e1120;
+	background: var(--BG);
 	display: flex;
 	position: fixed;
 	flex-direction: column;
@@ -470,6 +471,69 @@ main {
 .left {
 	align-self: start;
 	margin-left: 11px;
+}
+
+.tags-input {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.tag-container {
+	display: flex;
+	align-items: center;
+	margin: 5px;
+}
+
+.tag {
+	height: 35px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background: var(--Secondary);
+	z-index: 1;
+	position: relative;
+}
+
+.tag:hover {
+	background-color: var(--Secondary-Hover);
+}
+
+.hash {
+	background: var(--Primary);
+	font-size: 1.6rem;
+	padding: 0 5px;
+	height: 35px;
+	width: min-content;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	color: var(--BG-300);
+	font-weight: 600;
+	margin-right: -2px;
+	position: relative;
+	z-index: 1;
+}
+
+.ted {
+	margin-top: 5px;
+	height: 35px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding-left: 10px;
+	background: var(--Secondary);
+	font-weight: 600;
+}
+.edit-tag {
+	height: 35px;
+	width: 100%;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding-left: 10px;
+	background: var(--Secondary);
+	font-weight: 600;
+	z-index: 1;
 }
 @media (width >= 2560px) {
 	h1 {
