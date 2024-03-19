@@ -73,13 +73,6 @@
 	}
 	function toggleEdit(index: number) {
 		tags[index].editable = !tags[index].editable
-		const input = document.querySelector('.edit-tag-' + index) as HTMLInputElement
-
-		if (tags[index].editable) {
-			setTimeout(() => {
-				input.focus()
-			}, 0)
-		}
 	}
 
 	function handleTagEditKeyDown(event: KeyboardEvent, index: number) {
@@ -158,13 +151,14 @@
 	{#each tags as tag, index (tag)}
 		<div class="tag-container">
 			<div class="hash">#</div>
-			<button class="tag" on:click={() => toggleEdit(index)}>
+			<button class="tag" on:click={(e) => toggleEdit(index)}>
 				{#if tag.editable}
 					<input
 						type="text"
 						bind:value={tag.value}
 						on:keydown={(e) => handleTagEditKeyDown(e, index)}
-						class={'edit-tag edit-tag-' + index} />
+						class="edit-tag"
+						autofocus={true} />
 				{:else}
 					<b>{tag.value}</b>
 					<button class="fa-solid fa-xmark relative top-[2px]" on:click={() => removeTag(index)} />
