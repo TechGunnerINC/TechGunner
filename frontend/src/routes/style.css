@@ -5,8 +5,9 @@
 :root {
 	--Primary: #0effbd;
 	--BG: #000715;
-	--BG-300: hsl(220deg 97.47% 11.24%);
 	--Secondary: #005eff;
+	--Highlight-1: hsl(220deg 97.47% 11.24%);
+	--Highlight-2: #022683;
 }
 ::-webkit-scrollbar {
 	width: 7px;
@@ -28,7 +29,7 @@ body {
 	background: var(--BG);
 	color: #fff;
 	overflow-x: hidden;
-	font-family: 'Saira Semi Condensed';
+	font-family: 'Saira Semi Condensed', sans-serif;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -36,7 +37,7 @@ body {
 }
 *::selection {
 	background: var(--Primary);
-	color: var(--BG-300);
+	color: var(--Highlight-1);
 }
 img::selection {
 	background: none;
@@ -101,7 +102,7 @@ img:hover {
 form,
 input,
 textarea {
-	background: var(--BG-300);
+	background: var(--Highlight-1);
 	border-radius: 5px;
 	color: #fff;
 	resize: none;
@@ -128,7 +129,7 @@ input:-webkit-autofill:active {
 }
 .prime {
 	background: var(--Primary);
-	color: var(--BG-300);
+	color: var(--Highlight-1);
 }
 .prime:hover,
 .prime:focus {
@@ -137,7 +138,7 @@ input:-webkit-autofill:active {
 }
 .sec {
 	color: #fff;
-	background: var(--BG-300);
+	background: var(--Highlight-1);
 }
 .sec:hover,
 .sec:focus {
@@ -206,7 +207,7 @@ nav a {
 nav a:is(:hover, :focus, :active, .act) {
 	margin-left: 25px;
 	background: var(--Primary);
-	color: var(--BG-300);
+	color: var(--Highlight-1);
 }
 .ico {
 	margin-left: -6px;
@@ -247,7 +248,7 @@ main {
 	height: 10px;
 }
 .skil::before {
-	background: var(--BG-300);
+	background: var(--Highlight-1);
 	width: 270px;
 }
 .skil::after {
@@ -256,7 +257,7 @@ main {
 }
 .icon {
 	background: var(--Primary);
-	color: var(--BG-300);
+	color: var(--Highlight-1);
 	padding: 5px;
 	margin: 4px;
 	border-radius: 5px;
@@ -269,7 +270,7 @@ main {
 	padding: 15px;
 	position: relative;
 	top: 250px;
-	background: var(--BG-300);
+	background: var(--Highlight-1);
 	border-radius: 10px;
 }
 .s-form {
@@ -310,7 +311,7 @@ main {
 .gen {
 	position: relative;
 	left: 50em;
-	background: #022683;
+	background: var(--Highlight-2);
 	width: 210px;
 	height: 32px;
 	padding-left: 25px;
@@ -342,7 +343,7 @@ main {
 	width: 430px;
 	height: 6px;
 	border-radius: 5px;
-	background: #022683;
+	background: var(--Highlight-2);
 }
 .length {
 	height: 6px;
@@ -381,7 +382,7 @@ main {
 	height: 38px;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
-	color: var(--BG-300);
+	color: var(--Highlight-1);
 }
 .use {
 	width: 400px !important;
@@ -420,7 +421,7 @@ main {
 	width: 30px;
 	height: 30px;
 	background: var(--Primary);
-	border: 5px solid var(--BG-300);
+	border: 5px solid var(--Highlight-1);
 	border-radius: 50%;
 }
 .cont {
@@ -429,7 +430,7 @@ main {
 	align-items: center;
 }
 .cont section {
-	background: var(--BG-300);
+	background: var(--Highlight-1);
 	width: 55rem;
 	height: 35em;
 	margin-top: 8rem;
@@ -462,8 +463,8 @@ main {
 	align-items: center;
 	justify-content: center;
 	width: 265px;
-	background: var(--BG-300);
-	padding: 50px 0px;
+	background: var(--Highlight-1);
+	padding: 50px 0;
 	gap: 10px;
 	border-radius: 20px;
 	margin-top: 52px;
@@ -509,7 +510,7 @@ main {
 	width: min-content;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
-	color: var(--BG-300);
+	color: var(--Highlight-1);
 	font-weight: 600;
 	margin-right: -2px;
 	position: relative;
@@ -535,6 +536,54 @@ main {
 	font-weight: 600;
 	z-index: 1;
 }
+.fa-check {
+	color: var(--Primary);
+}
+.center-sh {
+	box-shadow: -1px 2px 15px 7px rgba(0, 0, 0, 0.78);
+	-webkit-box-shadow: -1px 2px 15px 7px rgba(0, 0, 0, 0.78);
+	-moz-box-shadow: -1px 2px 15px 7px rgba(0, 0, 0, 0.78);
+	z-index: -22;
+}
+.select-wrapper {
+	width: 200px;
+	height: 35px;
+	background: var(--Highlight-1);
+}
+
+.select {
+	width: 90%;
+	height: 35px;
+	padding-left: 10px;
+	padding-top: 5px;
+	border-radius: 5px;
+	background: var(--Highlight-1);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.options {
+	z-index: 20;
+	width: 100%;
+	max-height: 260px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background: var(--Highlight-1);
+	border-radius: 5px;
+}
+.options::-webkit-scrollbar {
+	width: 0;
+}
+.option {
+	padding: 7px;
+	border-radius: 5px;
+}
+
+.option:is(:hover, :focus, .active) {
+	background: var(--Highlight-2);
+}
+
 @media (width >= 2560px) {
 	h1 {
 		font-size: 5.5rem;
