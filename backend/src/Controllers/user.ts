@@ -1,7 +1,6 @@
 import { Elysia, t } from 'elysia'
 import { PrismaClient } from '@prisma/client'
 import { GenToken, checkState } from '../Libs/auth'
-import bcrypt from 'bcrypt'
 
 const db = new PrismaClient()
 
@@ -30,8 +29,7 @@ const route = new Elysia()
 							return { msg: 'Username Password and E-mail are required' }
 						}
 
-						const salt = await bcrypt.genSalt(10)
-						const hash = await bcrypt.hash(password, salt)
+						const hash = await Bun.password.hash(password, { algorithm: 'bcrypt', cost: 10 })
 
 						const user = await db.user.create({
 							data: {
@@ -104,7 +102,7 @@ const route = new Elysia()
 						})
 
 						if (user) {
-							const match = await bcrypt.compare(password, user.password)
+							const match = await Bun.password.verify(password, user.password, 'bcrypt')
 
 							if (match) {
 								const token = GenToken(user)
@@ -177,8 +175,7 @@ const route = new Elysia()
 						const token = checkState(body.auth, username)
 
 						if (token === 'Owner') {
-							const salt = await bcrypt.genSalt(10)
-							const hash = await bcrypt.hash(password, salt)
+							const hash = await Bun.password.hash(password, { algorithm: 'bcrypt', cost: 10 })
 
 							const user = await db.user.update({
 								where: {
@@ -251,7 +248,7 @@ const route = new Elysia()
 								select: { password: true }
 							})
 							if (user) {
-								const correct = await bcrypt.compare(password, user.password)
+								const correct = await Bun.password.verify(password, user.password, 'bcrypt')
 								if (correct) {
 									await db.user.delete({
 										where: {
